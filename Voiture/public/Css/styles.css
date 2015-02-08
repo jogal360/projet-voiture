@@ -1,0 +1,57 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+}
+html, body {
+    height: 100%;
+}
+footer {
+    color: #666;
+    background: #222;
+    height: 25px;
+    text-align: center;
+}
+footer a {
+    color: #999;
+}
+footer a:hover {
+    color: #efefef;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4px;
+}
+.push {
+    height: 50px;
+}
+.remember-me{
+    color: #ffffff;
+    font-size: small;
+}
+.cent {
+    text-align:center;
+}
+
+/* Estilos para botones responsivos */
+@media (max-width: 768px) {
+    .btn-responsive {
+        padding:2px 4px;
+        font-size:80%;
+        line-height: 1;
+        border-radius:3px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .btn-responsive {
+        padding:4px 9px;
+        font-size:90%;
+        line-height: 1.2;
+    }
+}
+/* Fin estilos botones */
+
+
+

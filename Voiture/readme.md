@@ -3,6 +3,16 @@
 Aplicación tipo videojuego sobre autos
 
 
+##Bdd
+1 Crear una bdd en phpmyadmin
+nombre: projetlaravel, crear
+
+Archivo de configuración:
+app/config/database.php
+    *Usamos mysql
+    Configurar nombre bdd
+    user y password
+
 
 ### License
 
