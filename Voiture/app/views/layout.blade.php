@@ -52,7 +52,7 @@
                         <li>
                             <a class="dropdown-toggle" data-toggle='dropdown' href="#">
                         <span class="icon icon-wh i-profile">
-                            @{{ Auth::user()->full_name }} <span class="caret"></span>
+                            {{ Auth::user()->nom .' '. Auth::user()->prenom  }} <span class="caret"></span>
                         </span>
                             </a>
                             <ul class="dropdown-menu">
@@ -60,12 +60,12 @@
                                 <li><a href=" @{{ route ( 'account' ) }}">Editar usuario</a></li>
                                 <li><a href=" @{{ route( 'search' ) }}">Buscar</a></li>
                                 <li><a href=" @{{ route( 'messagerieSend' ) }}">Enviar mensaje</a></li>
-                                <li><a href=" @{{ route( 'logout' ) }}">Salir</a></li>
+                                <li><a href=" {{ route( 'logout' ) }}">Salir</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <a class="navbar-brand pull-right der_con" href="#">Ultima conexion: @{{ date("d F Y",strtotime(Auth::user()->updated_at)) }} at {{ date("g:ha",strtotime(Auth::user()->updated_at)) }}</a>
-                    <a class="navbar-brand pull-right der_con" href="#">Conectado desde @{{ $_SERVER['REMOTE_ADDR'] }}</a>
+                    <a class="navbar-brand pull-right der_con" href="#">Ultima conexion: {{ date("d F Y",strtotime(Auth::user()->updated_at)) }} at {{ date("g:ha",strtotime(Auth::user()->updated_at)) }}</a>
+                    <a class="navbar-brand pull-right der_con" href="#">Conectado desde {{ $_SERVER['REMOTE_ADDR'] }}</a>
                 @else
                     {{ Form::open(['route'=> 'login', 'method' => 'POST', 'role' => 'form', 'class' => 'navbar-form navbar-right']) }}
                     @if(Session::has('login_error'))
@@ -90,9 +90,11 @@
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
-
+    @include('flash::message')
 
     @yield('content')
+
+
 
     <div class="push"><!--//--></div>
 </div>
@@ -108,6 +110,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js')}}"></script>
+<script>
+    $('#flash-overlay-modal').modal();
+</script>
 @yield('scripts')
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

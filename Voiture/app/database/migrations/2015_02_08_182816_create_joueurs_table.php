@@ -25,7 +25,6 @@ class CreateJoueursTable extends Migration {
 			$table->string('description');
 			$table->string('website_url', 50);
 			$table->string('adr_ip', 15);
-			$table->tinyInteger('number_attemps');
 
 			$table->timestamps();
 		});

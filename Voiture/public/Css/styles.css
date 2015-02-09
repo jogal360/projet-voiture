@@ -11,6 +11,9 @@ body {
     float: none;
     margin: 0 auto;
 }
+.der_con {
+    font-size: smaller;
+}
 
 html, body {
     height: 100%;
@@ -20,6 +23,9 @@ footer {
     background: #222;
     height: 25px;
     text-align: center;
+}
+.alert{
+    margin-bottom: 1px;
 }
 footer a {
     color: #999;

@@ -19,13 +19,19 @@ Route::group(['before'=>'guest'], function(){
 	//Ruta para registrar un usuario
 	Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersController@signUp']);
 
-	//Ruta para mostrar una vez que se ha registrado
+	//Ruta para enviar los datos de registro
 	Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersController@register']);
+
+	//Ruta para confirmar el registro por mail
+	Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path', 'uses' => 'UsersController@confirm']);
 
 	//Ruta para iniciar sesión
 	Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 });
 
+//Creamos un nuevo grupo y evaluamos que esten disponibles solo si se está conectado
+Route::group(['before'=> 'auth'],function() {
 
-//Ruta para iniciar sesión
-Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+	//Ruta para cerrar sesión
+	Route::get('logout',['as' => 'logout', 'uses' => 'AuthController@logout']);
+});

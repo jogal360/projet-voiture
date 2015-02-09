@@ -12,11 +12,6 @@ class CreateUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('users', function($table)
-		{
-			$table->boolean('verified');
-		});
-
 		Schema::create('users', function($table)
 		{
 			$table->increments('id');
@@ -26,6 +21,9 @@ class CreateUserTable extends Migration {
 			$table->string('email', 25);
 			$table->string('password');
 			$table->integer('role_id')->unsigned();
+			$table->boolean('verified')->default(0);
+			$table->tinyInteger('number_attemps')->nullable();
+			$table->string('confirmation_code')->nullable();
 
 			$table->string('remember_token')->nullable();
 

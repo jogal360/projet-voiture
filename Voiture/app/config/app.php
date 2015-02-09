@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Mews\Captcha\CaptchaServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider',
 		// Custom
 		'Voiture\Components\FieldServiceProvider',
 
@@ -191,7 +192,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-		'Captcha' => 'Mews\Captcha\Facades\Captcha',
+		'Captcha' 			=> 'Mews\Captcha\Facades\Captcha',
+		'Flash' 			=> 'Laracasts\Flash\Flash',
 		//Custom
 		'Field'             => 'Voiture\Components\Field'
 

@@ -23,12 +23,39 @@ class JoueurRepo extends BaseRepo{
             'candidates.user'
         ])->get();
     }
-    public function newJoueur()
+    /*
+     * Crear un nuevo usuario y se establece el valor del role en 3 (usuario estandar)
+     * El estado de verificado se coloca en 0
+     */
+    public function newJoueur($confirmation_code)
     {
+
         $user = new User();
-        $user->role_id = 3;
+        $user->role_id  = 3;
+        $user->verified = 0;
+        $user->confirmation_code = $confirmation_code;
         return $user;
     }
+
+    /*
+     * Metodo para consultar el email ingresado al iniciar sesión erroneamente
+     * @params $mail String
+     */
+    public function checkMail($mail)
+    {
+        $user = User::where('email','=' ,$mail)->first();
+        return $user;
+    }
+
+    public function changeAttemps($mail)
+    {
+
+    }
+
+
+
+
+
     public function getAUser($id)
     {
         $user = User::find($id);
