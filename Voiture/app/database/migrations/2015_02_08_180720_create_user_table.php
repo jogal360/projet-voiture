@@ -12,6 +12,11 @@ class CreateUserTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::table('users', function($table)
+		{
+			$table->boolean('verified');
+		});
+
 		Schema::create('users', function($table)
 		{
 			$table->increments('id');

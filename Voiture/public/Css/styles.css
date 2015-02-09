@@ -2,6 +2,16 @@
 body {
     padding-top: 50px;
 }
+.error_message{
+    color: red;
+    font-weight: bold;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 html, body {
     height: 100%;
 }

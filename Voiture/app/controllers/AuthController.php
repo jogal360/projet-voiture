@@ -15,10 +15,7 @@ class AuthController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('home');
-	}
+	//Metodo para logearse
 	public function login()
 	{
 

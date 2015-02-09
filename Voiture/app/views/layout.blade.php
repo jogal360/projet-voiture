@@ -83,7 +83,7 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success btn-responsive">Connexion</button>
-                    <a href="" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>
+                    <a href="{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>
 
                     {{Form::close()}}
                 @endif

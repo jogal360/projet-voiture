@@ -17,10 +17,10 @@ Route::get('/', ['as'=> 'home','uses' => 'HomeController@showIndex']);
 //Grupo para especificar las rutas disponibles cuando no esta logueado
 Route::group(['before'=>'guest'], function(){
 	//Ruta para registrar un usuario
-	Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersControllers@signUp']);
+	Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersController@signUp']);
 
 	//Ruta para mostrar una vez que se ha registrado
-	Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersControllers@register']);
+	Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersController@register']);
 
 	//Ruta para iniciar sesión
 	Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
