@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand hidden-sm" href="{{ route('home') }}">Crazy car</a>
+                <a class="navbar-brand hidden-sm" href="{{ route('home') }}">Admin Panel</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 @if(Auth::check())
@@ -83,7 +83,7 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success btn-responsive">Connexion</button>
-                    <a href="{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>
+                    <!--<a href="{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>-->
 
                     {{Form::close()}}
                 @endif

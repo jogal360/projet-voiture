@@ -16,14 +16,14 @@ class AuthController extends BaseController {
 		$credentials = ['email'=>$data['email'],'password'=>$data['password']];
 		$mail = $this->joueurRepo->checkMail($data['email']);
 		//Si no hay ningun usuario con ese codigo
+
 		if ( ! $mail)
 		{
 			return Redirect::back()->with('login_error',1);
 		}
-
+		//else
 		$attemps 			= $mail->number_attemps; //0
 		$numberAttempsRest  = 3 - $attemps ;		//3
-
 
 
 		if($numberAttempsRest == 0)
