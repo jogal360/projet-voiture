@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJoueursTable extends Migration {
+class CreateUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,18 @@ class CreateJoueursTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('joueurs', function($table)
+		Schema::create('users', function($table)
 		{
 			$table->increments('id');
 
+			$table->string('prenom', 30);
+			$table->string('nom', 20);
+			$table->string('email', 25);
+			$table->string('password');
+			$table->integer('role_id')->unsigned();
+			$table->boolean('verified')->default(0);
+			$table->tinyInteger('number_attemps')->nullable();
+			$table->string('confirmation_code')->nullable();
 			$table->string('pseudo', 25);
 			$table->date('date_nac');
 			$table->enum('sexe', ['m', 'f']);
@@ -25,6 +33,12 @@ class CreateJoueursTable extends Migration {
 			$table->string('description');
 			$table->string('website_url', 50);
 			$table->string('adr_ip', 15);
+
+			$table->string('remember_token')->nullable();
+
+
+
+			$table->foreign('role_id')->references('id')->on('roles');
 
 			$table->timestamps();
 		});
@@ -37,7 +51,8 @@ class CreateJoueursTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('joueurs');
+		Schema::drop('users');
 	}
+
 
 }

@@ -52,7 +52,9 @@
                         <li>
                             <a class="dropdown-toggle" data-toggle='dropdown' href="#">
                         <span class="icon icon-wh i-profile">
-                            {{ Auth::user()->nom .' '. Auth::user()->prenom  }} <span class="caret"></span>
+                            <!--@{{ Auth::user()->nom .' '. Auth::user()->prenom  }}-->
+                            {{ var_dump(Config::get('database.connections.mysql')) }}
+                            <span class="caret"></span>
                         </span>
                             </a>
                             <ul class="dropdown-menu">
@@ -64,7 +66,8 @@
                             </ul>
                         </li>
                     </ul>
-                    <a class="navbar-brand pull-right der_con" href="#">Ultima conexion: {{ date("d F Y",strtotime(Auth::user()->updated_at)) }} at {{ date("g:ha",strtotime(Auth::user()->updated_at)) }}</a>
+                    <a class="navbar-brand pull-right der_con" href="#">Ultima conexion: {{Auth::user()->pseudo}}
+                        <!--@{{ date("d F Y",strtotime(Auth::user()->updated_at)) }}--> at {{ date("g:ha",strtotime(Auth::user()->updated_at)) }}</a>
                     <a class="navbar-brand pull-right der_con" href="#">Conectado desde {{ $_SERVER['REMOTE_ADDR'] }}</a>
                 @else
                     {{ Form::open(['route'=> 'login', 'method' => 'POST', 'role' => 'form', 'class' => 'navbar-form navbar-right']) }}
@@ -72,7 +75,7 @@
                         <span class="label label-danger">Identifiant ou mot de passe incorrect</span>
                     @endif
                     <div class="form-group ">
-                        {{ Form::email('email', null, ['class' => 'form-control' , 'placeholder' =>'Email']) }}
+                        {{ Form::text('user', null, ['class' => 'form-control' , 'placeholder' =>'user']) }}
                     </div>
                     <div class="form-group">
                         {{ Form::password('password', ['class' => 'form-control' , 'placeholder' =>'Password']) }}
@@ -83,6 +86,7 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success btn-responsive">Connexion</button>
+                    {{ var_dump(Config::get('database.connections.mysql')) }}
                     <!--<a href="{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>-->
 
                     {{Form::close()}}

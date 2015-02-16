@@ -55,6 +55,39 @@ App::error(function(Voiture\Managers\ValidationException $e)
 {
 	return Redirect::back()->withInput()->withErrors($e->getErrors());
 });
+App::error(function(PDOException $exception)
+{
+	Session::flush();
+	Log::error("Error connecting to database: ".$exception->getMessage());
+	//return 'Sorry! Something is wrong with this account!';
+
+	setUserPwd('root','');
+	Flash::overlay('Sorry! You not have privileges for do this! :(', 'Forbidden!');
+	return Redirect::route('home');
+	//return Redirect::back()->with('login_error_attemps',1);
+});
+App::error(function(ErrorException $exception)
+{
+	Session::flush();
+	setUserPwd('root','');
+	if (strpos($exception->getMessage(),'SQLSTATE[HY000] [1044]') !== false)
+	{
+
+		Log::error("Error connecting to database: ".$exception->getMessage());
+		//return 'Sorry! Something is wrong with this account!';
+
+		Flash::overlay('Sorry!! You not have privileges for do this! :(', 'Forbidden!');
+		return Redirect::route('home');
+		//return Redirect::back()->with('login_error_attemps',1);
+	}
+	else
+	{
+		Flash::overlay('Error inconnu');
+		return Redirect::route('home');
+	}
+
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,3 +117,30 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+function changeModel($model_name, $table)
+{
+
+}
+function setUserPwd($user, $pwd)
+{
+	$nameUser = $user;
+	$password = $pwd;
+
+	$arr = Config::get('database');
+	$arr['connections']['mysql']['username'] = $nameUser;
+	$arr['connections']['mysql']['password'] = $password;
+	//$ar = "return " + $arr;
+	$data = var_export($arr, 1);
+	File::put(app_path() . '/config/database.php', "<?php\n return \n $data ;");
+
+
+
+	//Config::set('database.connections.mysql.username' , $nameUser);
+	//Config::set('database.connections.mysql.password' , $password);
+	//DB::reconnect('mysql');
+	//DB::setDefaultConnection('mysql');
+
+	//$connex = Config::get('database.connections.'.$nmgest);
+	//dd(Config::get('database.connections.mysql'));
+}

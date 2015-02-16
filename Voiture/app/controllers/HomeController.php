@@ -17,6 +17,15 @@ class HomeController extends BaseController {
 
 	public function showIndex()
 	{
+
+		//Config::set('database.connections.mysql.username' , 'user');
+		//Config::set('database.connections.mysql.password' , '123');
+		//$connex = Config::get('database.connections.'.$nmgest);
+		//dd(Config::get('database.connections.mysql'));
+
+
+
+
 		return View::make('home');
 	}
 

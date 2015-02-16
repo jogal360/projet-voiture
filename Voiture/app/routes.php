@@ -26,7 +26,7 @@ Route::group(['before'=>'guest'], function(){
 	Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path', 'uses' => 'UsersController@confirm']);
 
 	//Ruta para iniciar sesión
-	Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+	Route::post('login', ['as' => 'login', 'uses' => 'AuthController@loginAdmin']);
 });
 
 //Creamos un nuevo grupo y evaluamos que esten disponibles solo si se está conectado

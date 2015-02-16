@@ -38,12 +38,12 @@ class JoueurRepo extends BaseRepo{
     }
 
     /*
-     * Metodo para consultar el email ingresado al iniciar sesión erroneamente
-     * @params $mail String
+     * Metodo para verificar que sea una credencial válida registrada
+     * @params $user String
      */
-    public function checkMail($mail)
+    public function isCredentialValid($user)
     {
-        $user = User::where('email','=' ,$mail)->first();
+        $user = User::where('prenom','=' ,$user)->first();
         return $user;
     }
 

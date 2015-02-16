@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'model' => 'Voiture\Entities\User',
+	'model' => 'Voiture\Entities\Utilisateur',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'table' => 'users',
+	'table' => 'utilisateurs',
 
 	/*
 	|--------------------------------------------------------------------------

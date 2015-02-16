@@ -50,7 +50,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div><!-- /.carousel -->
-
     <a class="btn btn-default" href="@{{ route('password.remind')}}" role="button">
         Reset password &raquo;
     </a>

@@ -11,4 +11,8 @@ class Role extends \Eloquent {
     {
         return $this->hasMany('Voiture\Entities\User');
     }
+    public function utilisateur()
+    {
+        return $this->hasMany('Voiture\Entities\Utilisateur');
+    }
 }
