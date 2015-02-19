@@ -15,7 +15,7 @@ class AuthController extends BaseController {
 	//Metodo para logearse
 	public function loginAdmin()
 	{
-
+		//dd('ctm');
 		$data = Input::only('user','password','remember');
 		$pseudo_login = $data['user'];
 		$pwd_login = $data['password'];

@@ -5,13 +5,13 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Utilisateur extends \Eloquent implements UserInterface, RemindableInterface{
+class Utilisateur extends \Eloquent implements UserInterface{
 
-    use UserTrait, RemindableTrait;
+    use UserTrait;
 
     protected $fillable = [];
-    protected $timestamps = false;
     protected $table = 'utilisateurs';
+    public $timestamps = false;
 
     //funcion qcon el nombre que se le da en archivo de view
     public function role()
