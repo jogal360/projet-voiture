@@ -5,9 +5,9 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Utilisateur extends \Eloquent implements UserInterface{
+class Utilisateur extends \Eloquent implements UserInterface, RemindableInterface{
 
-    use UserTrait;
+    use UserTrait, RemindableTrait;
 
     protected $fillable = [];
     protected $table = 'utilisateurs';
