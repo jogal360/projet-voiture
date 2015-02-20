@@ -18,4 +18,5 @@ class Utilisateur extends \Eloquent implements UserInterface, RemindableInterfac
     {
         return $this->belongsTo('Voiture\Entities\Role');
     }
+
 }
