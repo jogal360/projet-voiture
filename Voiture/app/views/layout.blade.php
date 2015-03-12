@@ -16,6 +16,8 @@
     <!-- Personal CSS -->
     <link href="{{ asset ('Css/styles.css') }}" rel="stylesheet">
 
+    <link href="{{ asset( 'font-awesome/css/font-awesome.min.css' )}}" rel="stylesheet" type="text/css">
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]>
     <script src="{{ asset('bootstrap/js/ie8-responsive-file-warning.js')}}"></script><![endif]-->
@@ -35,47 +37,40 @@
 ================================================== -->
 <body>
 <div class="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Header -->
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-toggle"></span>
                 </button>
-                <a class="navbar-brand hidden-sm" href="{{ route('home') }}">Admin Panel</a>
+                <a class="navbar-brand" href="#">
+                    @if(! Auth::check())
+                        Crazy Car
+                    @else
+                        {{Auth::user()->pseudo}}
+                    @endif
+                </a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 @if(Auth::check())
-                    <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <a class="dropdown-toggle" data-toggle='dropdown' href="#">
-                        <span class="icon icon-wh i-profile">
-                            <!--@{{ Auth::user()->nom .' '. Auth::user()->prenom  }}-->
-                            {{ var_dump(Config::get('database.connections.mysql')) }}
-                            <span class="caret"></span>
-                        </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href=" @{{ route ('profile') }}">Editar perfil</a></li>
-                                <li><a href=" @{{ route ( 'account' ) }}">Editar usuario</a></li>
-                                <li><a href=" @{{ route( 'search' ) }}">Buscar</a></li>
-                                <li><a href=" @{{ route( 'messagerieSend' ) }}">Enviar mensaje</a></li>
-                                <li><a href=" {{ route( 'logout' ) }}">Salir</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>  {{Auth::user()->pseudo}} <span class="caret"></span></a>
+                            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                                <li><a href="#">My Profile</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ route( 'logout' ) }}"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
                     </ul>
-                    <a class="navbar-brand pull-right der_con" href="#">Ultima conexion: {{Auth::user()->pseudo}}
-                        <!--@{{ date("d F Y",strtotime(Auth::user()->updated_at)) }}--> at {{ date("g:ha",strtotime(Auth::user()->updated_at)) }}</a>
-                    <a class="navbar-brand pull-right der_con" href="#">Conectado desde {{ $_SERVER['REMOTE_ADDR'] }}</a>
                 @else
                     {{ Form::open(['route'=> 'login', 'method' => 'POST', 'role' => 'form', 'class' => 'navbar-form navbar-right']) }}
                     @if(Session::has('login_error'))
                         <span class="label label-danger">Identifiant ou mot de passe incorrect</span>
                     @endif
                     <div class="form-group ">
-                        {{ Form::text('user', null, ['class' => 'form-control' , 'placeholder' =>'user']) }}
+                        {{ Form::text('user', null, ['class' => 'form-control' , 'placeholder' =>'Username']) }}
                     </div>
                     <div class="form-group">
                         {{ Form::password('password', ['class' => 'form-control' , 'placeholder' =>'Password']) }}
@@ -86,34 +81,26 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success btn-responsive">Connexion</button>
-                    {{ var_dump(Config::get('database.connections.mysql')) }}
-                    <!--<a href="{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>-->
+                    <!--<a href="@{{ route ('sign_up') }}" class="btn btn-primary btn-responsive" role="button">S'inscrire</a>-->
 
                     {{Form::close()}}
                 @endif
-            </div><!--/.navbar-collapse -->
-        </div>
-    </nav>
-    @include('flash::message')
+            </div>
+        </div><!-- /container -->
+    </div>
+    <!-- /Header -->
 
     @yield('content')
 
-
-
-    <div class="push"><!--//--></div>
 </div>
-<footer>
-    <div class="container">
-        <p>By Jog@L 2015</p>
-    </div>
-</footer>
-
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('Js/jquery.bpopup.min.js')}}"></script>
+<script src="{{ asset('Js/jquery.easing.1.3.js')}}"></script>
+<script src="{{ asset('Js/layout.js')}}"></script>
 <script>
     $('#flash-overlay-modal').modal();
 </script>

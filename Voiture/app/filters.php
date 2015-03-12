@@ -86,4 +86,17 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
-
+Route::filter('isModerateurCommunaute', function()
+{
+    if(! isModCom())
+    {
+        return Redirect::route('logout');
+    }
+});
+Route::filter('isSpecialist', function()
+{
+    if(! isSpecialist())
+    {
+        return Redirect::route('logout');
+    }
+});

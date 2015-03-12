@@ -16,22 +16,56 @@ Route::get('/', ['as'=> 'home','uses' => 'HomeController@showIndex']);
 
 //Grupo para especificar las rutas disponibles cuando no esta logueado
 Route::group(['before'=>'guest'], function(){
-	//Ruta para registrar un usuario
-	Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersController@signUp']);
+    //Ruta para registrar un usuario
+    Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersController@signUp']);
 
-	//Ruta para enviar los datos de registro
-	Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersController@register']);
+    //Ruta para enviar los datos de registro
+    Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersController@register']);
 
-	//Ruta para confirmar el registro por mail
-	Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path', 'uses' => 'UsersController@confirm']);
+    //Ruta para confirmar el registro por mail
+    Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path', 'uses' => 'UsersController@confirm']);
 
-	//Ruta para iniciar sesión
-	Route::post('login', ['as' => 'login', 'uses' => 'AuthController@loginAdmin']);
+    //Ruta para iniciar sesión
+    Route::post('login', ['as' => 'login', 'uses' => 'AuthController@loginAdmin']);
+});
+// Grupo para moderador de comunidad
+Route::group(['before' => 'isModerateurCommunaute'], function(){
+    Route::get('control/panel-admin/mod-communaute' , ['as' => 'mod-com', 'uses' => 'AuthController@loginModCom']);
+
+    Route::get('control/panel-admin/mod-communaute/users' , ['as' => 'list_users', 'uses' => 'ModerateurController@listUsers']);
 });
 
+//Grupo para Specialist
+Route::group(['before' => 'isSpecialist'], function(){
+    Route::get('control/panel-admin/specialist' , ['as' => 'specialist', 'uses' => 'AuthController@loginSpecialist']);
+});
 //Creamos un nuevo grupo y evaluamos que esten disponibles solo si se está conectado
 Route::group(['before'=> 'auth'],function() {
+    Route::pattern('id', '[0-9]+');
+    Route::pattern('layout', '[0-9]+');
+    //Ruta para cerrar sesión
+    Route::get('logout',['as' => 'logout', 'uses' => 'AuthController@logout']);
 
-	//Ruta para cerrar sesión
-	Route::get('logout',['as' => 'logout', 'uses' => 'AuthController@logout']);
+    Route::get('control/panel-admin/mod-communaute/{layout}/{id}',['as' => 'user-detail', function($layout, $id)
+        {
+            $layoutP = '';
+            if($layout == 1)
+            {
+
+                $layoutP = 'moderateur-com/home-mod';
+                //&dd($id, $layoutP);
+                //return Redirect::action('UsersController@detailUser', array($id));
+
+                //Route::get('control/panel-admin/mod-communaute/detail/{id}', 'UsersController@detailUser');
+                return Redirect::route('user-detail', array($layout,$id));
+                //return Redirect::route('UsersController@detailUser', array(1,1));
+                //Route::get('control/panel-admin/mod-communaute/detail/{id}{', 'UserController@showProfile');
+            }
+
+        }]
+    );
+
 });
+Route::get('control/panel-admin/mod-communaute/detail/{layout}/{id}' , ['as' => 'user-detail', 'uses' => 'UsersController@detailUser']);
+
+

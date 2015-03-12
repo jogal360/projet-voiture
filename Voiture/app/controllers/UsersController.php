@@ -2,18 +2,21 @@
 use Voiture\Managers\RegisterManager;
 use Voiture\Repositories\JoueurRepo;
 use Voiture\Repositories\RoleRepo;
+use Voiture\Repositories\UsersRepo;
 use Voiture\Entities\User;
 class UsersController extends BaseController {
 
 
 	protected $joueurRepo;
 	protected $roleRepo;
+    protected $usersRepo;
 
 	public function __construct(JoueurRepo $joueurRepo,
-								RoleRepo  $roleRepo)
+								RoleRepo  $roleRepo, UsersRepo $usersRepo)
 	{
 		$this->joueurRepo = $joueurRepo;
 		$this->roleRepo  = $roleRepo;
+        $this->usersRepo  = $usersRepo;
 	}
 	//Metodo para mostrar la vista de registrarse
 	public function signUp()
@@ -76,5 +79,13 @@ class UsersController extends BaseController {
 
 		return Redirect::route('home');
 	}
+    public function detailUser($layoutp, $id)
+    {
+        //dd('holi '. $layoutp. ' '.$id);
+        $user = $this->usersRepo->getAUser($id);
+        $layoutp = 'moderateur-com/home-mod';
 
+         return View::make('moderateur-com/users/detail-user',compact('user','layoutp'));
+
+    }
 }

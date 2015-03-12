@@ -125,6 +125,7 @@ return array(
 		'Laracasts\Flash\FlashServiceProvider',
 		// Custom
 		'Voiture\Components\FieldServiceProvider',
+        'Voiture\Composers\ComposerServiceProvider',
 
 	),
 

@@ -1,16 +1,19 @@
 <?php
 use Voiture\Repositories\JoueurRepo;
 use Voiture\Repositories\AdminsRepo;
+use Voiture\Repositories\UsersRepo;
 
 class AuthController extends BaseController {
 
 	protected $joueurRepo;
 	protected $adminsRepo;
+    protected $usersRepo;
 
-	public function __construct(JoueurRepo $joueurRepo, AdminsRepo $adminsRepo)
+	public function __construct(JoueurRepo $joueurRepo, AdminsRepo $adminsRepo, UsersRepo $usersRepo)
 	{
 		$this->joueurRepo = $joueurRepo;
 		$this->adminsRepo = $adminsRepo;
+        $this->usersRepo = $usersRepo;
 	}
 	//Metodo para logearse
 	public function loginAdmin()
@@ -59,15 +62,18 @@ class AuthController extends BaseController {
 					$role = Auth::user()->role_id;
 					$pwd = '';
 					$userBD = '';
+                    $route = '';
 					switch ($role)
 					{
 						case 1 :
 							$userBD = 'moderateur';
 							$pwd = 'moderateur';
+                            $route = 'mod-com';
 							break;
 						case 2 :
 							$userBD = 'specialiste';
 							$pwd = 'specialiste';
+                            $route = 'specialist';
 							break;
 						case 3 :
 							$userBD = 'admin_concours';
@@ -87,7 +93,7 @@ class AuthController extends BaseController {
 					//dd($userBD, $pwd);
 					setUserPwd($userBD, $pwd);
 					//dd(Config::get('database.connections.mysql'));
-					return Redirect::route('home');
+                    return Redirect::route($route);
 				}
 				else
 				{
@@ -99,6 +105,26 @@ class AuthController extends BaseController {
 //			}
 //		}
 	}
+
+    public function loginModCom()
+    {
+        //$numberUsers = $this->usersRepo->getNumberUsers();
+
+
+            return View::make('moderateur-com/panel-mod');
+
+
+    }
+    public function listUsers()
+    {
+        $dataUsers   = $this->usersRepo->getAllUsers();
+        return View::make('moderateur-com/list-users',compact('dataUsers'));
+    }
+    public function loginSpecialist()
+    {
+
+        return View::make('specialist/home');
+    }
 
 	public function logout()
 	{
