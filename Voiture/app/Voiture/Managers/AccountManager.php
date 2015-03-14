@@ -12,6 +12,7 @@ namespace Voiture\Managers;
 class AccountManager extends BaseManager {
     public function getRules()
     {
+        //dd($this->entity->id);
         $rules = [
             'prenom' => 'required',
             'nom' => 'required',

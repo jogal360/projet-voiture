@@ -1,6 +1,9 @@
 @if($entity == "mod")
     @extends('moderateur-com/home-mod')
 @endif
+@section('scripts')
+    <script src="{{ asset('Js/orderResults.js')}}"></script>
+@stop
 @section('contentmod')
     {{ Notification::getAliased('okUpdate'); }}
     <div id="resultat" >
@@ -41,6 +44,9 @@
 
             <br><p>Pagina:</p>
             {{ $dataUsers-> links() }}
+            @if($entity == "mod")
+                <p><a class="btn btn-danger btn-sm" href="{{ route('mod-com') }}" role="button">Annuler</a></p>
+            @endif
         </div>
     </div>
 @stop

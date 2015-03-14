@@ -148,7 +148,6 @@ footer {
 
 /* bpopup */
 #detailUser, .bMulti {
-    top: 5% !important;
     background-color: #FFF;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 25px 5px #999;

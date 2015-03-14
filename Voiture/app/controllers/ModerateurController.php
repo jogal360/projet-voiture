@@ -16,6 +16,22 @@ class ModerateurController extends BaseController {
 
     public function listUsers()
     {
+        //which field to sort by
+        $sortby = Input::get('sortby');
+
+        //order variable will dontain the direction (ASC or DESC)
+        $order = Input::get('order');
+
+        if ($sortby && $order) {
+
+            $posts = $this->post->orderBy($sortby, $order)->get();
+
+        } else {
+
+            $posts = $this->post->get();
+
+        }
+
         $entity = "mod";
         $dataUsers   = $this->usersRepo->getAllUsers();
         return View::make('moderateur-com/list-users',compact('dataUsers', 'entity'));
