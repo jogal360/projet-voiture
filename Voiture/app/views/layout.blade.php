@@ -96,7 +96,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="{{ asset ('Js/jquery-1.11.1.js')}}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('Js/jquery.bpopup.min.js')}}"></script>
 <script src="{{ asset('Js/jquery.easing.1.3.js')}}"></script>

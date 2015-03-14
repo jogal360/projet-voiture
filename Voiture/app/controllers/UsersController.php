@@ -79,13 +79,5 @@ class UsersController extends BaseController {
 
 		return Redirect::route('home');
 	}
-    public function detailUser($layoutp, $id)
-    {
-        //dd('holi '. $layoutp. ' '.$id);
-        $user = $this->usersRepo->getAUser($id);
-        $layoutp = 'moderateur-com/home-mod';
 
-         return View::make('moderateur-com/users/detail-user',compact('user','layoutp'));
-
-    }
 }

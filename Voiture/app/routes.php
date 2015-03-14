@@ -33,6 +33,9 @@ Route::group(['before' => 'isModerateurCommunaute'], function(){
     Route::get('control/panel-admin/mod-communaute' , ['as' => 'mod-com', 'uses' => 'AuthController@loginModCom']);
 
     Route::get('control/panel-admin/mod-communaute/users' , ['as' => 'list_users', 'uses' => 'ModerateurController@listUsers']);
+
+    Route::post('control/panel-admin/mod-communaute/users/detail',['as' => 'user-detail', 'uses' => 'ModerateurController@detailUser']);
+
 });
 
 //Grupo para Specialist
@@ -46,26 +49,7 @@ Route::group(['before'=> 'auth'],function() {
     //Ruta para cerrar sesión
     Route::get('logout',['as' => 'logout', 'uses' => 'AuthController@logout']);
 
-    Route::get('control/panel-admin/mod-communaute/{layout}/{id}',['as' => 'user-detail', function($layout, $id)
-        {
-            $layoutP = '';
-            if($layout == 1)
-            {
-
-                $layoutP = 'moderateur-com/home-mod';
-                //&dd($id, $layoutP);
-                //return Redirect::action('UsersController@detailUser', array($id));
-
-                //Route::get('control/panel-admin/mod-communaute/detail/{id}', 'UsersController@detailUser');
-                return Redirect::route('user-detail', array($layout,$id));
-                //return Redirect::route('UsersController@detailUser', array(1,1));
-                //Route::get('control/panel-admin/mod-communaute/detail/{id}{', 'UserController@showProfile');
-            }
-
-        }]
-    );
-
 });
-Route::get('control/panel-admin/mod-communaute/detail/{layout}/{id}' , ['as' => 'user-detail', 'uses' => 'UsersController@detailUser']);
+
 
 

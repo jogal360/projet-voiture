@@ -5,7 +5,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Prenom</th>
+                    <th>Prénom</th>
                     <th>Nom</th>
                     <th>Mail</th>
                     <th>Pseudo</th>
@@ -21,12 +21,12 @@
                         <td>{{ $user -> email }}</td>
                         <td>{{ $user -> pseudo }}</td>
                         <td>
-                            <a class="btn btn-success btn-responsive" href="{{ route('user-detail', ['1', $user->id]) }}" role="button">
+                            <a class="btn btn-success btn-responsive afficher" value="{{$user->id }}" data=1 href="#" role="button">
                                 Afficher &raquo;
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-warning btn-responsive" href="#" role="button">
+                            <a class="btn btn-warning btn-responsive editer" href="#" value="{{$user->id }}" role="button">
                                 Editer &raquo;
                             </a>
                         </td>
@@ -34,6 +34,7 @@
                 @endforeach
                 </tbody>
             </table>
+
             <br><p>Pagina:</p>
             {{ $dataUsers-> links() }}
         </div>

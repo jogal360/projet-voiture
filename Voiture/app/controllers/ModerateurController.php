@@ -17,5 +17,15 @@ class ModerateurController extends BaseController {
         $dataUsers   = $this->usersRepo->getAllUsers();
         return View::make('moderateur-com/list-users',compact('dataUsers'));
     }
+    public function detailUser()
+    {
+        $id = Input::get('id');
+        $user = $this->usersRepo->getAUser($id);
+        /*
+        $layoutp = 'moderateur-com/home-mod';
+        $sectionUp = "@extends($layoutp)@section('detail')";
+        $sectionDown = "@stop"; */
+        return View::make('users/detail-user',compact('user'));
 
+    }
 }

@@ -19,7 +19,7 @@ class UsersRepo extends BaseRepo{
      */
     public function getAllUsers()
     {
-        $users = User::paginate(5);
+        $users = User::paginate(10);
         return $users;
     }
     public function getNumberUsers()

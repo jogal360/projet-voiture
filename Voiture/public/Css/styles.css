@@ -141,11 +141,14 @@ footer {
     color: #000000;
     font-size: 200%;
 }
-
+.title-user, .space-down {
+    margin-bottom: 15px;
+}
 /*  */
 
-/* bpopup
-#resultate, .bMulti {
+/* bpopup */
+#detailUser, .bMulti {
+    top: 5% !important;
     background-color: #FFF;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 25px 5px #999;
@@ -153,10 +156,11 @@ footer {
     display: none;
     min-width: 450px;
     min-height: 250px;
+    max-width: 540px;
     padding: 25px;
 }
 
-#resultate .logo {
+#detailUser .logo {
     color: #2B91AF;
     font: bold 325% 'Petrona',sans;
 }
@@ -181,4 +185,6 @@ footer {
     text-align: center;
     text-decoration: none;
 }
- */
+.wait {
+    width: 50px;
+}

@@ -149,7 +149,7 @@
                 </ul>
                 <!--  /top-right small menu -->
 
-                <a class="welcomeUser" href="#">
+                <a class="welcomeUser" href="{{ route('mod-com') }}">
                     <strong><i class="glyphicon glyphicon-dashboard"></i> Bienvenue {{Auth::user()->role->name}}</strong>
                 </a>
 
@@ -160,6 +160,10 @@
                     @yield('users')
                     @yield('info-panel')
                     @yield('detail')
+
+                    <div id="detailUser" >
+                    </div>
+
                 </div><!--/row-->
 
 
