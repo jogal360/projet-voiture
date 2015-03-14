@@ -53,6 +53,11 @@ App::error(function(Exception $exception, $code)
 
 App::error(function(Voiture\Managers\ValidationException $e)
 {
+
+/*
+    return Redirect::action('ModerateurController@updateProfil')
+    ->withInput(Input::except('password'))
+    ->withErrors($e->getErrors());  */
 	return Redirect::back()->withInput()->withErrors($e->getErrors());
 });
 /*

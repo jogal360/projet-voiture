@@ -4,8 +4,10 @@
 
 
 $(document).ready(function() {
-
-    $(".alert").addClass("in").fadeOut(10000);
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+    $(".alert").addClass("in").fadeOut(5000);
 
     /* swap open/close side menu icons */
     $('[data-toggle=collapse]').click(function(){
@@ -50,11 +52,15 @@ $(document).ready(function() {
                 type: method,
                 url: url,
                 data: {'id' : id},
-                beforeSend: function(){
-                    $('#detailUser').append('<div class="col-xs-12"><div class="col-sm-4 col-xs-12 cent"></div> <img class="wait" src="../../../Img/wait.gif" /></div>');
+                beforeSend: function() {
+
+                    $('#detailUser').append('<span class=\'button b-close\'><span>X</span></span>' +
+                    '<div class="col-xs-12 cent"><div class="col-sm-12 col-xs-12"></div>' +
+                    '<img class="wait" src="../../../Img/wait.gif" /></div>');
+                    //return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
                 },
                 success: function (data) {
-                    $('#detailUser').html(" <span class='button b-close'><span>X</span></span>"+data)
+                    $('#detailUser').html(" <span class='button b-close'><span>X</span></span>"+data);
                 }
             });
             $('#detailUser').bPopup({
@@ -63,21 +69,25 @@ $(document).ready(function() {
                 transition: 'slideDown'
             });
         }
-        else
-        {
-            alert ('daahhhh');
-        }
     }
 
-    $('.editer').click(function(e){
-        e.preventDefault();
-        var id = $(this).attr('value');
-        editProfileUser(id);
-    });
+
 
    function editProfileUser(id)
    {
        var id = id;
-
+       if (id)
+       {
+           var url = 'users/edit/'+id;
+           //alert (url);
+           var method  = 'GET';
+           $.ajax({
+               type: method,
+               url: url,
+               success: function (data) {
+                   $("#cont").html(data);
+               }
+           });
+       }
    }
 });

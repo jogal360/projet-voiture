@@ -132,7 +132,13 @@ return array(
         "time" => "Heure",
         "available" => "Disponible",
         "size" => "Taille",
-        'captcha'       => 'Entrez les caractères figurant dans l\'image,ci-dessous'
+        'captcha'       => 'Entrez les caractères figurant dans l\'image,ci-dessous',
+
+        'date_nac'     => 'Date de naissance',
+        'email'         => 'correo electronico',
+        'adr_postale'	=> 'Code Postale',
+
+        'captcha'       => 'Para comprobar que eres humano ingresa los caracteres de la imagen mostrada',
     ),
 
 );

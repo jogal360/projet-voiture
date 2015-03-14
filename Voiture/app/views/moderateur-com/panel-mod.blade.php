@@ -1,5 +1,5 @@
 @extends('moderateur-com/home-mod')
-@section('info-panel')
+@section('contentmod')
     <div class="col-md-6">
         <!-- div box total users -->
         <div class="panel panel-primary">

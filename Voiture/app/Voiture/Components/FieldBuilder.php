@@ -63,7 +63,7 @@ class FieldBuilder {
         switch($type)
         {
             case 'select':
-                $options = array(''=> 'Seleccione')+ $options;
+                $options = array(''=> 'Choisissez ')+ $options;
                 return $this->form->select($name, $options, $value, $attributes);
             case 'checkbox' :
                 return $this->form->checkbox($name);

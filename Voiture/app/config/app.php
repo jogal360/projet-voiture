@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Mews\Captcha\CaptchaServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
+        'Krucas\Notification\NotificationServiceProvider',
 		// Custom
 		'Voiture\Components\FieldServiceProvider',
         'Voiture\Composers\ComposerServiceProvider',
@@ -195,6 +196,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Captcha' 			=> 'Mews\Captcha\Facades\Captcha',
 		'Flash' 			=> 'Laracasts\Flash\Flash',
+        'Notification' => 'Krucas\Notification\Facades\Notification',
 		//Custom
 		'Field'             => 'Voiture\Components\Field'
 

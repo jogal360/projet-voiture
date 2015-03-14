@@ -1,7 +1,11 @@
-@extends('moderateur-com/home-mod')
-@section('users')
+@if($entity == "mod")
+    @extends('moderateur-com/home-mod')
+@endif
+@section('contentmod')
+    {{ Notification::getAliased('okUpdate'); }}
     <div id="resultat" >
         <div class="table-responsive">
+            <h1>Liste d'utilisateurs</h1>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -26,7 +30,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-warning btn-responsive editer" href="#" value="{{$user->id }}" role="button">
+                            <a class="btn btn-warning btn-responsive editer" href="{{ route ('user-edit', [$user->id]) }}" value="{{$user->id }}" role="button">
                                 Editer &raquo;
                             </a>
                         </td>

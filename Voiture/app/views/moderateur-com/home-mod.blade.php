@@ -157,25 +157,14 @@
 
                 <div class="row">
                     <!-- center left-->
-                    @yield('users')
-                    @yield('info-panel')
-                    @yield('detail')
+                    <div id="cont">@yield('contentmod')</div>
 
-                    <div id="detailUser" >
-                    </div>
-
+                    <div id="detailUser"></div>
                 </div><!--/row-->
-
-
-
             @yield('info-panel2')
-
             </div><!--/col-span-9-->
         </div>
 
     </div>
     <!-- /Main -->
-
-
-
 @stop
