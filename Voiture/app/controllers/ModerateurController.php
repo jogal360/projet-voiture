@@ -14,27 +14,21 @@ class ModerateurController extends BaseController {
     }
 
 
-    public function listUsers()
+    public function listUsers($sortby=null , $order = null)
     {
-        //which field to sort by
-        $sortby = Input::get('sortby');
+        $dataUsers   = $this->usersRepo->getAllUsers();
+        $users= '';
+        $sortbyP = $sortby;
+        $orderP = $order;
 
-        //order variable will dontain the direction (ASC or DESC)
-        $order = Input::get('order');
-
-        if ($sortby && $order) {
-
-            $posts = $this->post->orderBy($sortby, $order)->get();
-
+        if ($sortby  && $order ) {
+            $dataUsers = $this->usersRepo->orderBy($sortby, $order);
         } else {
-
-            $posts = $this->post->get();
-
+            $dataUsers =  $dataUsers;
         }
 
         $entity = "mod";
-        $dataUsers   = $this->usersRepo->getAllUsers();
-        return View::make('moderateur-com/list-users',compact('dataUsers', 'entity'));
+        return View::make('moderateur-com/list-users',compact('dataUsers', 'entity','sortbyP', 'orderP'));
     }
     public function detailUser()
     {
@@ -50,9 +44,9 @@ class ModerateurController extends BaseController {
     public function editUser($id)
     {
         //dd(Input::all());
-
         $id = $id;
         $user = $this->usersRepo->getAUser($id);
+
         $entity = "mod";
         $sexe  = \Lang::get('utils.sex');
         return View::make('users/update-user',compact('user','sexe'));
@@ -73,7 +67,6 @@ class ModerateurController extends BaseController {
         $manager  = new AccountManager($user, Input::all());
         $manager->save();
 
-        Notification::success(Notification::message('<i class="glyphicon glyphicon-ok"></i><b class="cent">  Utilisateur mise en jour! :)</b>')->alias('okUpdate'));
         return Redirect::route('list_users');
     }
 }

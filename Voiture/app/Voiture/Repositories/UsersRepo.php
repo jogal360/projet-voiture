@@ -22,6 +22,16 @@ class UsersRepo extends BaseRepo{
         $users = User::paginate(10);
         return $users;
     }
+    public function orderBy($orderBy, $order)
+    {
+        $users = User::orderBy($orderBy, $order)->paginate(10);
+        return $users;
+    }
+    public function getAUser($id)
+    {
+        $user = User::find($id);
+        return $user;
+    }
     public function getNumberUsers()
     {
         $numberUsers = User::all()->count();
@@ -66,11 +76,7 @@ class UsersRepo extends BaseRepo{
     {
 
     }
-    public function getAUser($id)
-    {
-        $user = User::find($id);
-        return $user;
-    }
+
 
     public function resultsSearchName($value)
     {

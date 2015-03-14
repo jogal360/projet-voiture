@@ -37,7 +37,7 @@ abstract class BaseManager {
 
         $this->entity->fill($this->prepareData($this->data));
         $this->entity->save();
-
+        Notification::success(Notification::message('<i class="glyphicon glyphicon-ok"></i><b class="cent">  Utilisateur mise en jour! :)</b>')->alias('okUpdate'));
         return true;
     }
 

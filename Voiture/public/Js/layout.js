@@ -19,9 +19,10 @@ $(document).ready(function() {
      */
     $('.afficher').click(function(e){
         e.preventDefault();
+        var url = $(this).attr('href');
         var id = $(this).attr('value');
         var layout = $(this).attr('data');
-        showProfilePopUp(id,layout);
+        showProfilePopUp(id,layout,url);
     });
     /**
      * To show the profile details in popup
@@ -29,21 +30,19 @@ $(document).ready(function() {
      * @param id Layout origin
      * @return PopUp with the info profile
      */
-    function showProfilePopUp(id, layout)
+    function showProfilePopUp(id, layout,url)
     {
         var id      =   id;
         var layout  =   layout;
-        var url     = '';
+        var url     = url;
         var method  = '';
 
         if(layout == 1)
         {
-            url = "users/detail";
             method = "POST"
         }
         else
         {
-            url = "";
             method = "GET";
         }
         if(method == "POST")
@@ -52,11 +51,10 @@ $(document).ready(function() {
                 type: method,
                 url: url,
                 data: {'id' : id},
-                beforeSend: function() {
-
+                beforeSend: function(){
                     $('#detailUser').append('<span class=\'button b-close\'><span>X</span></span>' +
                     '<div class="col-xs-12 cent"><div class="col-sm-12 col-xs-12"></div>' +
-                    '<img class="wait" src="../../../Img/wait.gif" /></div>');
+                    '<img class="wait" src= "'+pathImgWait+'" /></div>');
                     //return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
                 },
                 success: function (data) {

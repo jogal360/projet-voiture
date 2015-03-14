@@ -53,14 +53,13 @@ Route::group(['before'=> 'auth'],function() {
 });
 Route::group(['before' => 'isModerateurCommunaute'], function(){
     Route::get('control/panel-admin/mod-communaute' , ['as' => 'mod-com', 'uses' => 'AuthController@loginModCom']);
-    Route::get('control/panel-admin/mod-communaute/users' , ['as' => 'list_users', 'uses' => 'ModerateurController@listUsers']);
+    Route::get('control/panel-admin/mod-communaute/users/list/{sortby?}/{order?}' , ['as' => 'list_users', 'uses' => 'ModerateurController@listUsers']);
     Route::get('control/panel-admin/mod-communaute/users/edit/{id}',['as' => 'user-edit', 'uses' => 'ModerateurController@editUser']);
 });
 Route::group(['before' => 'csrf'], function(){
 // Grupo para moderador de comunidad
-    Route::group(['before' => 'isModerateurCommunaute'], function(){
-
-
+    Route::group(['before' => 'isModerateurCommunaute'], function()
+    {
         Route::post('control/panel-admin/mod-communaute/users/detail',['as' => 'user-detail', 'uses' => 'ModerateurController@detailUser']);
 
         Route::put('control/panel-admin/mod-communaute/users/detail',['as' => 'update_user', 'uses' => 'ModerateurController@updateProfil']);
