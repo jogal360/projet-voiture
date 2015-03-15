@@ -13,7 +13,6 @@ class ModerateurController extends BaseController {
         $this->usersRepo = $usersRepo;
     }
 
-
     public function listUsers($sortby=null , $order = null)
     {
         $dataUsers   = $this->usersRepo->getAllUsers();
@@ -21,7 +20,7 @@ class ModerateurController extends BaseController {
 
         $sortbyP = $sortby;
         $orderP = $order;
-
+        $search = false;
         if ($sortby  && $order )
         {
             $dataUsers = $this->usersRepo->orderBy($sortby, $order);
@@ -29,34 +28,21 @@ class ModerateurController extends BaseController {
             $dataUsers =  $dataUsers;
         }
         $entity = "mod";
-        return View::make('moderateur-com/list-users',compact('dataUsers', 'entity','sortbyP', 'orderP'));
+        return View::make('moderateur-com/list-users',compact('dataUsers', 'entity','sortbyP', 'orderP','search'));
     }
     public function detailUser()
     {
         $id = Input::get('id');
         $user = $this->usersRepo->getAUser($id);
-        /*
-        $layoutp = 'moderateur-com/home-mod';
-        $sectionUp = "@extends($layoutp)@section('detail')";
-        $sectionDown = "@stop"; */
         return View::make('users/detail-user',compact('user'));
-
     }
     public function editUser($id)
     {
-        //dd(Input::all());
         $id = $id;
         $user = $this->usersRepo->getAUser($id);
-
         $entity = "mod";
         $sexe  = \Lang::get('utils.sex');
         return View::make('users/update-user',compact('user','sexe'));
-        /*
-        $onlyData =  $view->renderSections()['contentmod'];
-        return $onlyData;
-        $this->layout->dataMod =  $onlyData;
-
-        //return Section::yield('content'); */
 
     }
     public function updateProfil()
@@ -64,7 +50,6 @@ class ModerateurController extends BaseController {
         $id     = Input::get('id');
         $data = Input::all();
         $user  = $this->usersRepo->getAUser($id);
-        //dd($);
         $manager  = new AccountManager($user, Input::all());
         $manager->save();
 
@@ -75,7 +60,6 @@ class ModerateurController extends BaseController {
         $usr = "";
         $data = "";
         $ids = Input::get('id');
-
 
         foreach ($ids as $id){
             if($id)
@@ -98,12 +82,13 @@ class ModerateurController extends BaseController {
                     }
                     return Response::json(array('success'=>false));
                 }
-
-
                 $data .= "L'utilisateur ". $prenom ." ".$nom." a été suprimée ";
             }
         }
-
+        if( Input::get('numberUsers') == 'all')
+        {
+            $data = "Tous les utilisateurs ont été supprimées";
+        }
         return Response::json(array('success'=>true, 'data'=> $data));
 
     }
@@ -111,39 +96,53 @@ class ModerateurController extends BaseController {
     {
         $method = Input::get('method');
         $value = Input::get('data');
-        $all = Input::get('all');
-
         $results = '';
         $response = '';
-        if($method == "prenom")
+        if(Input::has('all'))
         {
-            $results = $this->usersRepo->resultsSearch("prenom", $value);
+            $sortbyP = null;
+            $orderP = null;
+            $dataUsers = $this->usersRepo->resultsSearchAll($method, $value);
+            $entity = "mod";
+            $search= true;
+            $page = View::make('moderateur-com/list-users',compact('dataUsers', 'entity','sortbyP', 'orderP','search'));
+            $view = $page->renderSections()['contentmod'];
+            return Response::json(array('success'=>true, 'result'=>$view));
         }
-        elseif($method == "nom")
+        else
         {
-            $results = $this->usersRepo->resultsSearch("nom", $value);
-        }
-        elseif($method == "email")
-        {
-            $results = $this->usersRepo->resultsSearch("email", $value);
-        }
-        if($method == 'nom' || $method == 'prenom'){
-            foreach($results as $result)
+            if($method == "prenom")
             {
-                $response .= "<a class='list-group-item' data='$result->nom' id=''>".$result->prenom." " . $result->nom."</a>";
+                $results = $this->usersRepo->resultsSearch("prenom", $value);
             }
-        }
-        elseif($method == 'prenom'){
-            foreach($results as $result)
+            elseif($method == "nom")
             {
-                $response .= "<a class='list-group-item' data='$result->prenom' id='$result->id'>".$result->prenom." " . $result->nom."</a>";
+                $results = $this->usersRepo->resultsSearch("nom", $value);
             }
-        }
-        elseif($method == 'email')
-        {
-            foreach($results as $result)
+            elseif($method == "email")
             {
-                $response .= "<a class='list-group-item' data='$result->email' id='$result->id'>$result->email</a>";
+                $results = $this->usersRepo->resultsSearch("email", $value);
+            }
+            if($method == 'nom')
+            {
+                foreach($results as $result)
+                {
+                    $response .= "<a class='list-group-item' data='$result->nom' id='$result->id'>".$result->nom."</a>";
+                }
+            }
+            elseif($method == 'prenom')
+            {
+                foreach($results as $result)
+                {
+                    $response .= "<a class='list-group-item' data='$result->prenom' id='$result->id'>".$result->prenom."</a>";
+                }
+            }
+            elseif($method == 'email')
+            {
+                foreach($results as $result)
+                {
+                    $response .= "<a class='list-group-item' data='$result->email' id='$result->id'>$result->email</a>";
+                }
             }
         }
         return $response;

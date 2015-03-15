@@ -93,7 +93,14 @@ $(document).ready(function() {
         var checked = getUsersCheckedToDrop();
         var url = $('#drop').attr('href');
         var token = $(this).data('token');
-
+        var statusCheckAll = '';
+        if($('.checkbox-all').is(':checked'))
+        {
+            statusCheckAll = 'all';
+        }
+        else {
+            statusCheckAll = 'one';
+        }
         if (jQuery.isEmptyObject(checked))
         {
             swal("Pas d'utilisateurs sélectionnés");
@@ -117,7 +124,7 @@ $(document).ready(function() {
                         $.ajax({
                             type: 'POST',
                             url: url,
-                            data: {'id' : checked, _token : token },
+                            data: {'id' : checked, _token : token, 'numberUsers' : statusCheckAll },
                             success : function(data){
                                 if(data.success == false)
                                 {
@@ -222,13 +229,7 @@ $(document).ready(function() {
                     }
                     else
                     {
-                        swal({
-                            title: "YEiiiiiiii!",
-                            text: data.data,
-                            type: "success"},function(){
-                            // reload page after swal-dialog closes
-                            location.reload();
-                        });
+                        $('#cont').html(data.result)
                     }
                 }
             });

@@ -43,6 +43,12 @@ class UsersRepo extends BaseRepo{
 
         return $data ;
     }
+    public function resultsSearchAll($value, $data)
+    {
+        $data = User::where($value, 'LIKE', '%' . $data . '%')->paginate(7);
+
+        return $data ;
+    }
     public function findLatest($take=10)
     {
         return Category::with([

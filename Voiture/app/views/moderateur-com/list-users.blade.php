@@ -1,11 +1,11 @@
 @if($entity == "mod")
     @extends('moderateur-com/home-mod')
 @endif
-@section('scripts')
-    {{ HTML::script('bootstrap-sweetalert/js/sweet-alert.js') }}
-    {{ HTML::style('bootstrap-sweetalert/css/sweet-alert.css') }}
-@endsection
+
 @section('contentmod')
+    @if($search==true)
+    <script src="{{ asset('Js/layout.js')}}"></script>
+    @endif
     <script>
         var pathImgWait = "{{  asset('Img/wait.gif') }}";
         var searchRoute = "{{ route('search-user') }}"
@@ -32,48 +32,51 @@
                 <thead>
                 <tr>
                     <th>
-                        @if ($sortbyP == 'prenom' && $orderP == 'asc')
-
+                        @if($sortbyP == 'prenom' && $orderP == 'asc' && $search == null)
                             <a href="{{ route('list_users', ['sortby' => 'prenom', 'order'=> 'desc']) }}">
                                 <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> Prenom
                             </a>
-
+                        @elseif($search == true)
+                            Prenom
                         @else
                             <a href="{{ route('list_users', ['sortby' => 'prenom', 'order'=> 'asc']) }}">
                                 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Prenom</a>
                         @endif
                     </th>
                     <th>
-                        @if ($sortbyP == 'nom' && $orderP == 'asc')
+                        @if ($sortbyP == 'nom' && $orderP == 'asc' && $search == null)
 
                             <a href="{{ route('list_users', ['sortby' => 'nom', 'order'=> 'desc']) }}">
                                 <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> Nom
                             </a>
-
+                        @elseif($search == true)
+                            Nom
                         @else
                             <a href="{{ route('list_users', ['sortby' => 'nom', 'order'=> 'asc']) }}">
                                 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Nom</a>
                         @endif
                     </th>
                     <th>
-                        @if ($sortbyP == 'email' && $orderP == 'asc')
+                        @if ($sortbyP == 'email' && $orderP == 'asc' && $search == null)
 
                             <a href="{{ route('list_users', ['sortby' => 'email', 'order'=> 'desc']) }}">
                                 <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> Email
                             </a>
-
+                        @elseif($search == true)
+                            Email
                         @else
                             <a href="{{ route('list_users', ['sortby' => 'email', 'order'=> 'asc']) }}">
                                 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Email</a>
                         @endif
                     </th>
                     <th>
-                        @if ($sortbyP == 'pseudo' && $orderP == 'asc')
+                        @if ($sortbyP == 'pseudo' && $orderP == 'asc' && $search == null)
 
                             <a href="{{ route('list_users', ['sortby' => 'pseudo', 'order'=> 'desc']) }}">
                                 <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> Pseudo
                             </a>
-
+                        @elseif($search == true)
+                            Pseudo
                         @else
                             <a href="{{ route('list_users', ['sortby' => 'pseudo', 'order'=> 'asc']) }}">
                                 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Pseudo</a>

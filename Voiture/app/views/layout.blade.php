@@ -102,6 +102,8 @@
 <script src="{{ asset('Js/jquery.bpopup.min.js')}}"></script>
 <script src="{{ asset('Js/jquery.easing.1.3.js')}}"></script>
 <script src="{{ asset('Js/layout.js')}}"></script>
+{{ HTML::script('bootstrap-sweetalert/js/sweet-alert.js') }}
+{{ HTML::style('bootstrap-sweetalert/css/sweet-alert.css') }}
 <script>
     $('#flash-overlay-modal').modal();
 </script>
