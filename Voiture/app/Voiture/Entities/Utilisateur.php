@@ -9,7 +9,9 @@ class Utilisateur extends \Eloquent implements UserInterface, RemindableInterfac
 
     use UserTrait, RemindableTrait;
 
-    protected $fillable = [];
+    protected $fillable = ['pseudo','role_id'];
+    protected $hidden = array('password', 'remember_token');
+
     protected $table = 'utilisateurs';
     public $timestamps = false;
 

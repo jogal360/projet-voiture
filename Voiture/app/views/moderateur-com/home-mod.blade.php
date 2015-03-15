@@ -28,7 +28,7 @@
                             <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Shoutbox</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-flag"></i> Transactions</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-exclamation-sign"></i> Rules</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+                            <li><a href="{{ route( 'logout' ) }}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
                         </ul>
                     </li>
 

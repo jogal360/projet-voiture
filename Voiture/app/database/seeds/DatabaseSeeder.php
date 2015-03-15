@@ -1,5 +1,6 @@
 <?php
 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -11,10 +12,9 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		// $this->call('UserTableSeeder');
 		$this->call('RolesTableSeeder');
-		$this->call('UtilisateursTableSeeder');
-
+        $this->call('UtilisateursTableSeeder');
+        $this->call('UsersTableSeeder');
 	}
 
 }
@@ -41,6 +41,9 @@ class RolesTableSeeder extends Seeder {
 		DB::table('roles')->insert(array(
 			'name' => 'user'
 		));
+        DB::table('roles')->insert(array(
+            'name' => 'superadmin'
+        ));
 
 	}
 }
@@ -72,5 +75,10 @@ class UtilisateursTableSeeder extends Seeder {
 			'password'	=> Hash::make('123'),
 			'role_id'	=> 5
 		));
+        DB::table('utilisateurs')->insert(array(
+            'pseudo' 	=> 'sadmin',
+            'password'	=> Hash::make('123'),
+            'role_id'	=> 7
+        ));
 	}
 }

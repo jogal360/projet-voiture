@@ -23,7 +23,9 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
-	protected $fillable = array('prenom','nom','email','date_nac','sexe', 'phone','adr_postale', 'description','website_url');
+	protected $fillable = array('prenom','nom','email','role_id','verified','number_attemps',
+        'confirmation_code', 'pseudo', 'date_nac','sexe', 'phone','adr_postale', 'description','website_url',
+        'adr_ip','created_at','updated_at');
 
 	//Un usuario pertenece a una rol
 	public function role()

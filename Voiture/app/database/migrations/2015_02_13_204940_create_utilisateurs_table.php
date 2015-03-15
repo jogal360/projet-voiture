@@ -16,7 +16,7 @@ class CreateUtilisateursTable extends Migration {
 		{
 			$table->increments('id');
 
-			$table->string('pseudo', 30)->unique();
+			$table->string('pseudo', 30);
 			$table->string('password');
 			$table->integer('role_id')->unsigned();
 

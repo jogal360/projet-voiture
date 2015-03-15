@@ -12,7 +12,6 @@ class AdminsRepo extends BaseRepo{
         return new Utilisateur();
     }
 
-
     /*
      * Metodo para verificar que sea una credencial válida registrada
      * @params $user String

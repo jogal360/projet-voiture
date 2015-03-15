@@ -18,22 +18,20 @@ class CreateUsersTable extends Migration {
 
 			$table->string('prenom', 30);
 			$table->string('nom', 20);
-			$table->string('email', 25);
-			$table->string('password');
+			$table->string('email', 65);
 			$table->integer('role_id')->unsigned();
-			$table->boolean('verified')->default(0);
+			$table->boolean('verified')->nullable();
 			$table->tinyInteger('number_attemps')->nullable();
 			$table->string('confirmation_code')->nullable();
-			$table->string('pseudo', 25);
+			$table->string('pseudo', 50);
 			$table->date('date_nac');
 			$table->enum('sexe', ['m', 'f']);
 			$table->char('phone', 15);
 			$table->char('adr_postale', 5);
-			$table->string('avatar', 30);
+			$table->string('avatar', 50);
 			$table->string('description');
-			$table->string('website_url', 50);
-			$table->string('adr_ip', 15);
-
+			$table->string('website_url', 100);
+			$table->string('adr_ip', 20);
 			$table->string('remember_token')->nullable();
 
 

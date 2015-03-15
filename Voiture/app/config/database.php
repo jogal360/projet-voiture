@@ -15,9 +15,9 @@
     array (
       'driver' => 'mysql',
       'host' => 'localhost',
-      'database' => 'projetvoiture',
-      'username' => 'moderateur',
-      'password' => 'moderateur',
+      'database' => 'PROJETVOITURE',
+      'username' => 'root',
+      'password' => '',
       'charset' => 'utf8',
       'collation' => 'utf8_unicode_ci',
       'prefix' => '',

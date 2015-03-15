@@ -135,7 +135,7 @@ return array(
         'captcha'       => 'Entrez les caractères figurant dans l\'image,ci-dessous',
 
         'date_nac'     => 'Date de naissance',
-        'email'         => 'correo electronico',
+        'email'         => 'email',
         'adr_postale'	=> 'Code Postale',
         'supp' => "",
         'captcha'       => 'Para comprobar que eres humano ingresa los caracteres de la imagen mostrada',
