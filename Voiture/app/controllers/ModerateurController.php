@@ -87,7 +87,7 @@ class ModerateurController extends BaseController {
         }
         if( Input::get('numberUsers') == 'all')
         {
-            $data = "Tous les utilisateurs ont été supprimées";
+            $data = "Tous les utilisateurs sélectionnés ont été supprimées";
         }
         return Response::json(array('success'=>true, 'data'=> $data));
 

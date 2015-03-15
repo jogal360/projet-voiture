@@ -55,7 +55,6 @@ $(document).ready(function() {
                     $('#detailUser').append('<span class=\'button b-close\'><span>X</span></span>' +
                     '<div class="col-xs-12 cent"><div class="col-sm-12 col-xs-12"></div>' +
                     '<img class="wait" src= "'+pathImgWait+'" /></div>');
-                    //return request.setRequestHeader('X-CSRF-Token', $("meta[name='token']").attr('content'));
                 },
                 success: function (data) {
                     $('#detailUser').html(" <span class='button b-close'><span>X</span></span>"+data);
@@ -109,13 +108,13 @@ $(document).ready(function() {
         else
         {
             swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this user!",
+                    title: "Êtes-vous sûr?",
+                    text: "Vous ne serez pas en mesure de récupérer cet utilisateur!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: 'btn-danger',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: "No, cancel plx!",
+                    confirmButtonText: 'Oui, supprimez-le!',
+                    cancelButtonText: "Non, annuler",
                     closeOnConfirm: false,
                     closeOnCancel: false
                 },
@@ -146,7 +145,7 @@ $(document).ready(function() {
                     }
                     else
                     {
-                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        swal("Annulé", "Utilisateur n'a pas été supprimée", "error");
                     }
                 });
         }
