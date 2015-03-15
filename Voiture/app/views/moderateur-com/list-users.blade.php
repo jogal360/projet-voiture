@@ -19,9 +19,9 @@
         &nbsp;&nbsp;&nbsp;{{Form::label('email')}} {{ Form::radio('search', 'email',null,['class'=>'search']) }}
     </div>
     <div class="input-group">
-        <input type="text" class="form-control" id="inputSearch" placeholder="Search for..." readonly>
+        <input type="text" class="form-control" name="inputSearch" id="inputSearch" placeholder="Search for..." readonly value="">
       <span class="input-group-btn">
-        <button class="btn btn-default disabled" type="button" id="goSearch">Go!</button>
+        <button class="btn btn-default disabled" type="button" id="goSearch" data-token="{{ csrf_token() }}">Go!</button>
       </span>
     </div><!-- /input-group -->
     <div id="resultatesS"></div>
@@ -84,7 +84,7 @@
                     <th>Effacer</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="listUsers">
                 @if($dataUsers)
                     @foreach($dataUsers as $user)
                         <tr>

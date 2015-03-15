@@ -202,26 +202,28 @@ $(document).ready(function() {
         });
     });
     $('#goSearch').click(function(){
-        if( $('#inputSearch').attr('value') == null)
+        if( $('#inputSearch').val()=='')
         {
             swal("Champ recherche vide");
         }
         else
         {
+            var dataInput = $('#inputSearch').val();
+            var fieldSearch = $('input:radio[name=search]:checked').val();
+            var token = $(this).data('token');
             $.ajax({
                 type: 'POST',
-                url: url,
-                data: {'id' : checked, _token : token },
+                url: searchRoute,
+                data: {'method' : fieldSearch, _token : token, 'data':dataInput, 'all':'all' },
                 success : function(data){
                     if(data.success == false)
                     {
-                        swal("Non autorisé", "Désolé, vous avez pas la permission de faire cette opération. \n " +
-                        "S'il vous plaît contactez votre administrateur", "error");
+                        swal("Non autorisé", "administrateur", "error");
                     }
                     else
                     {
                         swal({
-                            title: "Deleted!",
+                            title: "YEiiiiiiii!",
                             text: data.data,
                             type: "success"},function(){
                             // reload page after swal-dialog closes

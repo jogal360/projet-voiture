@@ -111,6 +111,8 @@ class ModerateurController extends BaseController {
     {
         $method = Input::get('method');
         $value = Input::get('data');
+        $all = Input::get('all');
+
         $results = '';
         $response = '';
         if($method == "prenom")
