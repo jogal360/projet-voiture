@@ -7,7 +7,7 @@ $(document).ready(function() {
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
-    $(".alert").addClass("in").fadeOut(5000);
+    $(".alert").addClass("in").fadeOut(10000);
 
     /* swap open/close side menu icons */
     $('[data-toggle=collapse]').click(function(){
@@ -69,23 +69,172 @@ $(document).ready(function() {
         }
     }
 
+    $('.editer').click( function(){
+        cleanCheckboxes();
+    });
+
+    $('.checkbox-all').click(function(){
+        if(this.checked) { // check select status
+            $('.checkbox-supp').each(function() { //loop through each checkbox
+                this.checked = true;  //select all checkboxes with class "checkbox1"
+            });
+        }else{
+            $('.checkbox-supp').each(function() { //loop through each checkbox
+                this.checked = false; //deselect all checkboxes with class "checkbox1"
+            });
+        }
+    });
+    /**
+     * To check all checkboxes suppr
+     */
+
+    $('#dropSelection').click(function (e){
+        e.preventDefault();
+        var checked = getUsersCheckedToDrop();
+        var url = $('#drop').attr('href');
+        var token = $(this).data('token');
+
+        if (jQuery.isEmptyObject(checked))
+        {
+            swal("Pas d'utilisateurs sélectionnés");
+            return;
+        }
+        else
+        {
+            swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this user!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn-danger',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm)  {
+                    if (isConfirm) {
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: {'id' : checked, _token : token },
+                            success : function(data){
+                                if(data.success == false)
+                                {
+                                    swal("Non autorisé", "Désolé, vous avez pas la permission de faire cette opération. \n " +
+                                    "S'il vous plaît contactez votre administrateur", "error");
+                                }
+                                else
+                                {
+                                    swal({
+                                        title: "Deleted!",
+                                        text: data.data,
+                                        type: "success"},function(){
+                                        // reload page after swal-dialog closes
+                                        location.reload();
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+        }
+    });
+    function getUsersCheckedToDrop()
+    {
+        var checked = [];
+        $('.checkbox-supp').each(function() { //loop through each checkbox
+            if(this.checked){
+                checked.push($(this).attr('value'));
+            }  //select all checkboxes with class "checkbox1"
+        });
+        return checked;
+    }
+    function cleanCheckboxes()
+    {
+        $("input:checked").each(function(){
+            this.checked = false; //deselect all checkboxes with class "checkbox1"
+        });
+    }
+    $('.search').click(function(){
+        $('#inputSearch').prop("readonly", false);
+        $('#inputSearch').val('');
+        $('#goSearch').removeClass('disabled');
+    });
 
 
-   function editProfileUser(id)
-   {
-       var id = id;
-       if (id)
-       {
-           var url = 'users/edit/'+id;
-           //alert (url);
-           var method  = 'GET';
-           $.ajax({
-               type: method,
-               url: url,
-               success: function (data) {
-                   $("#cont").html(data);
-               }
-           });
-       }
-   }
+    $('#inputSearch').on('input', function () {
+        var value ='#inputSearch';
+        var divName = "#resultatesS";
+        var fieldSearch = $('input:radio[name=search]:checked').val();
+        if ($(this).val() == "") {
+            $(value).attr({'value': ''})
+        }
+        var name = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: searchRoute,
+            data: {'method': fieldSearch, 'data' : name },
+            success: function (data) {
+                //Escribimos las sugerencias que nos manda la consulta
+                $(divName).fadeIn(800).html(data);
+
+                //Al hacer click en algua de las sugerencias
+                $('.list-group-item').on('click', function () {
+                    //Obtenemos la id unica de la sugerencia pulsada
+                    var id = $(this).attr('id');
+
+                    //Editamos el valor del input con data de la sugerencia pulsada
+                    $(value).val($(this).attr('data'));
+
+                    $(value).attr({'value': id})
+                    //Hacemos desaparecer el resto de sugerencias
+                    $(divName).fadeOut(800);
+                });
+                setTimeout(function(){
+                    $(divName).fadeOut("slow");
+                },3000);
+            }
+        });
+    });
+    $('#goSearch').click(function(){
+        if( $('#inputSearch').attr('value') == null)
+        {
+            swal("Champ recherche vide");
+        }
+        else
+        {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {'id' : checked, _token : token },
+                success : function(data){
+                    if(data.success == false)
+                    {
+                        swal("Non autorisé", "Désolé, vous avez pas la permission de faire cette opération. \n " +
+                        "S'il vous plaît contactez votre administrateur", "error");
+                    }
+                    else
+                    {
+                        swal({
+                            title: "Deleted!",
+                            text: data.data,
+                            type: "success"},function(){
+                            // reload page after swal-dialog closes
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        }
+
+    });
+
 });
+
+
+

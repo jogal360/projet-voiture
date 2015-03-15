@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/commands',
+    app_path().'/controllers',
+    app_path().'/models',
+    app_path().'/database/seeds',
 
 ));
 
@@ -48,17 +48,40 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+    Log::error($exception);
 });
 
 App::error(function(Voiture\Managers\ValidationException $e)
 {
+    return Redirect::back()->withInput()->withErrors($e->getErrors());
+});
+App::error(function(Symfony\Component\HttpKernel\Exception\HttpException $e)
+{
+    // Handle any HTTP exceptions thrown with App::abort() or from Laravel
+    // for e.g. hitting a missing route
+    $author = Auth::user()->role_id;
+    $page = '';
+    switch ($author)
+    {
+        case 1:
+            $page = "mod-com";
+            break;
+        default:
+            $page = "home";
+    }
+    $code = $e->getStatusCode();
 
-/*
-    return Redirect::action('ModerateurController@updateProfil')
-    ->withInput(Input::except('password'))
-    ->withErrors($e->getErrors());  */
-	return Redirect::back()->withInput()->withErrors($e->getErrors());
+    switch ($code)
+    {
+        case 403:
+            return "dah";//Response::view('errors/403', array(), 403);
+
+        case 500:
+            return "500"; //Response::view('errors/500', array(), 500);
+
+        default:
+            return Response::view('errors/notFound404', array('page'=>$page), $code);
+    }
 });
 /*
 App::error(function(PDOException $exception)
@@ -104,7 +127,7 @@ App::error(function(ErrorException $exception)
 
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -129,25 +152,25 @@ function changeModel($model_name, $table)
 }
 function setUserPwd($user, $pwd)
 {
-	$nameUser = $user;
-	$password = $pwd;
+    $nameUser = $user;
+    $password = $pwd;
 
-	$arr = Config::get('database');
-	$arr['connections']['mysql']['username'] = $nameUser;
-	$arr['connections']['mysql']['password'] = $password;
-	//$ar = "return " + $arr;
-	$data = var_export($arr, 1);
-	File::put(app_path() . '/config/database.php', "<?php\n return \n $data ;");
+    $arr = Config::get('database');
+    $arr['connections']['mysql']['username'] = $nameUser;
+    $arr['connections']['mysql']['password'] = $password;
+    //$ar = "return " + $arr;
+    $data = var_export($arr, 1);
+    File::put(app_path() . '/config/database.php', "<?php\n return \n $data ;");
 
 
 
-	//Config::set('database.connections.mysql.username' , $nameUser);
-	//Config::set('database.connections.mysql.password' , $password);
-	//DB::reconnect('mysql');
-	//DB::setDefaultConnection('mysql');
+    //Config::set('database.connections.mysql.username' , $nameUser);
+    //Config::set('database.connections.mysql.password' , $password);
+    //DB::reconnect('mysql');
+    //DB::setDefaultConnection('mysql');
 
-	//$connex = Config::get('database.connections.'.$nmgest);
-	//dd(Config::get('database.connections.mysql'));
+    //$connex = Config::get('database.connections.'.$nmgest);
+    //dd(Config::get('database.connections.mysql'));
 }
 function isModCom()
 {

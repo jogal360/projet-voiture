@@ -19,8 +19,8 @@ class AccountManager extends BaseManager {
             'email'     => 'required|email|unique:users,email,'.$this->entity->id,
             'date_nac'  => 'required|date',
             'sexe' => 'required|in:m,f',
-            'phone' => 'required|integer',
-            'phone' => 'required|integer',
+            'phone' => 'required',
+            'adr_postale' => 'required|integer',
             'description' => 'required',
             'website_url' => 'required|url',
         ];

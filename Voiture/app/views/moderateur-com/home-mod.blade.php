@@ -21,7 +21,7 @@
                             <h5>Settings <i class="glyphicon glyphicon-chevron-down"></i></h5>
                         </a>
                         <ul class="list-unstyled collapse in" id="userMenu">
-                            <li class="active"> <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+                            <li class="active"> <a href="{{ route('mod-com') }}"><i class="glyphicon glyphicon-home"></i> Home</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Shoutbox</a></li>

@@ -37,7 +37,12 @@ class UsersRepo extends BaseRepo{
         $numberUsers = User::all()->count();
         return $numberUsers;
     }
+    public function resultsSearch($value, $data)
+    {
+        $data = User::where($value, 'LIKE', '%' . $data . '%')->take(3)->get();
 
+        return $data ;
+    }
     public function findLatest($take=10)
     {
         return Category::with([
@@ -78,12 +83,7 @@ class UsersRepo extends BaseRepo{
     }
 
 
-    public function resultsSearchName($value)
-    {
-        $data = User::where('full_name', 'LIKE', '%' . $value . '%')->take(10)->get();
 
-        return $data ;
-    }
     public function resultsSearchEmail($value)
     {
         $data = User::where('email', 'LIKE', '%' . $value . '%')->take(10)->get();

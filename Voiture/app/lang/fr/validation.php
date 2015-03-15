@@ -137,7 +137,7 @@ return array(
         'date_nac'     => 'Date de naissance',
         'email'         => 'correo electronico',
         'adr_postale'	=> 'Code Postale',
-
+        'supp' => "",
         'captcha'       => 'Para comprobar que eres humano ingresa los caracteres de la imagen mostrada',
     ),
 

@@ -1,14 +1,33 @@
 @if($entity == "mod")
     @extends('moderateur-com/home-mod')
 @endif
+@section('scripts')
+    {{ HTML::script('bootstrap-sweetalert/js/sweet-alert.js') }}
+    {{ HTML::style('bootstrap-sweetalert/css/sweet-alert.css') }}
+@endsection
 @section('contentmod')
     <script>
         var pathImgWait = "{{  asset('Img/wait.gif') }}";
+        var searchRoute = "{{ route('search-user') }}"
     </script>
+
     {{ Notification::getAliased('okUpdate'); }}
+    <h3>Recherche d'un utilisateur</h3>
+    <div class="cent">
+        {{Form::label('prenom')}} {{ Form::radio('search', 'prenom',null,['class'=>'search']) }}
+        &nbsp;&nbsp;&nbsp;{{Form::label('nom')}} {{ Form::radio('search', 'nom',null,['class'=>'search']) }}
+        &nbsp;&nbsp;&nbsp;{{Form::label('email')}} {{ Form::radio('search', 'email',null,['class'=>'search']) }}
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" id="inputSearch" placeholder="Search for..." readonly>
+      <span class="input-group-btn">
+        <button class="btn btn-default disabled" type="button" id="goSearch">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+    <div id="resultatesS"></div>
     <div id="resultat" >
         <div class="table-responsive">
-            <h1>Liste d'utilisateurs</h1>
+            <h3>Liste d'utilisateurs</h3>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -62,6 +81,7 @@
                     </th>
                     <th>Affiher profil</th>
                     <th>Editer</th>
+                    <th>Effacer</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,17 +93,29 @@
                             <td>{{ $user -> email }}</td>
                             <td>{{ $user -> pseudo }}</td>
                             <td>
-                                <a class="btn btn-success btn-responsive afficher" value="{{$user->id }}" data=1 href="{{ route ('user-detail') }}" role="button">
+                                <a class="btn btn-success btn-sm btn-responsive afficher" value="{{$user->id }}" data=1 href="{{ route ('user-detail') }}" role="button">
                                     Afficher &raquo;
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-warning btn-responsive editer" href="{{ route ('user-edit', [$user->id]) }}" value="{{$user->id }}" role="button">
+                                <a class="btn btn-warning btn-sm btn-responsive editer" href="{{ route ('user-edit', [$user->id]) }}" value="{{$user->id }}" role="button">
                                     Editer &raquo;
                                 </a>
                             </td>
+                            <td>{{ Form::checkbox('supprimer', $user->id,null,['class'=>"checkbox-supp"]) }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2">
+                            <a id="dropSelection" class="btn-danger btn-xs btn-responsive" href="{{route('delete-user')}}" data-token="{{ csrf_token() }}">Effacer sélectionnées</a>
+                        </td>
+                        <td colspan="2">Check All {{ Form::checkbox('supprimer', 'allSup',null,['class'=>"checkbox-all"]) }}</td>
+                    </tr>
+                @else
+                    <tr><td colspan="7" class="btn-danger">Pas de resultats</td></tr>
                 @endif
                 </tbody>
             </table>
