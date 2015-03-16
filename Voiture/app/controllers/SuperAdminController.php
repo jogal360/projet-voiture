@@ -14,8 +14,9 @@ class SuperAdminController extends BaseController {
     }
     public function loginSAdmin()
     {
-        $this->usersRepo->getNumberAccounts();
-        return View::make('superadmin/panel-sadmin');
+        $numberAccounts = $this->usersRepo->getNumberAccounts();
+        $joueursSemaine = $this->usersRepo->getUsersRandom();
+        return View::make('superadmin/panel-sadmin',compact('numberAccounts','joueursSemaine'));
     }
 
 }

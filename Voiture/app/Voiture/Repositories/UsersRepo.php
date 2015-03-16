@@ -2,6 +2,7 @@
 
 
 namespace Voiture\Repositories;
+use Voiture\Entities\BankAccount;
 use Voiture\Entities\Role;
 use Voiture\Entities\User;
 use Illuminate\Support\Facades\Redirect;
@@ -43,11 +44,15 @@ class UsersRepo extends BaseRepo{
 
         return $data ;
     }
-    public function getNumberAccounts($value, $data)
+    public function getNumberAccounts()
     {
-        $data = User::where($value, 'LIKE', '%' . $data . '%')->take(3)->get();
-
+        $data = BankAccount::all()->count();
         return $data ;
+    }
+    public function getUsersRandom()
+    {
+        $data = User::orderByRaw("RAND()")->take(3)->get();
+        return $data;
     }
     public function resultsSearchAll($value, $data)
     {
@@ -59,9 +64,9 @@ class UsersRepo extends BaseRepo{
     {
         return Category::with([
             'candidates' => function($query) use ($take) {
-                    $query->take($take);
-                    $query->orderBy('created_at', 'DESC');
-                },
+                $query->take($take);
+                $query->orderBy('created_at', 'DESC');
+            },
             'candidates.user'
         ])->get();
     }

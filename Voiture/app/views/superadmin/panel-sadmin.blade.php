@@ -11,6 +11,7 @@
                     <div class="col-xs-9 text-right">
                         <div class="huge"><h2>{{ $numberUsers  }}</h2></div>
                         <div>
+                            <h4>
                             @if( $numberUsers === 1)
                                 Utilisateur
                             @elseif( $numberUsers > 1)
@@ -19,6 +20,7 @@
                                 Aucun utilisateur enregistré
                             @endif
                             dans la comunauté!
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -33,7 +35,17 @@
         </div>
         <!-- / div box total users -->
         <hr>
-
+        @foreach($joueursSemaine as $joueur)
+            {{$joueur->nom}}
+            @endforeach
+        <div class="panel panel-warning">
+            <div class="panel-heading"><div class="panel-title"><h4>Joueurs de la semaine</h4></div></div>
+            <div class="panel-body">
+                <div class="col-xs-4 text-center"><img src="{{asset('Photos/p1.png')}}" class="img-circle img-responsive"></div>
+                <div class="col-xs-4 text-center"><img src="{{asset('Photos/p2.png')}}" class="img-circle img-responsive"></div>
+                <div class="col-xs-4 text-center"><img src="{{asset('Photos/p5.png')}}" class="img-circle img-responsive"></div>
+            </div>
+        </div><!--/panel-->
         <div class="btn-group btn-group-justified">
             <a href="#" class="btn btn-primary col-sm-3">
                 <i class="glyphicon glyphicon-plus"></i><br>
@@ -103,34 +115,29 @@
 
     </div><!--/col-->
     <div class="col-md-6">
-        <div class="panel panel-primary">
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
                         <i class="fa fa-money fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><h2>{{ $numberUsers  }}</h2></div>
+                        <div class="huge"><h2>{{ $numberAccounts  }}</h2></div>
                         <div>
-                            @if( $numberUsers === 1)
-                                Utilisateur
-                            @elseif( $numberUsers > 1)
-                                Utilisateurs
-                            @else
-                                Aucun utilisateur enregistré
-                            @endif
-                            dans la comunauté!
+                            <h4>
+                                @if( $numberAccounts === 1)
+                                    Bank Account enregistrés.
+                                @elseif( $numberAccounts > 1)
+                                    Bank Accounts enregistrés.
+                                @else
+                                    Aucun bank account enregistré
+                                @endif
+                            </h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="{{ route('list_users') }}" id="viewDetailsUsers">
-                <div class="panel-footer">
-                    <span class="pull-left"><b>View Details</b></span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
+
         </div>
 
         <table class="table table-striped">
@@ -190,14 +197,6 @@
             </div><!--/panel content-->
         </div><!--/panel-->
 
-        <div class="panel panel-default">
-            <div class="panel-heading"><div class="panel-title"><h4>Engagement</h4></div></div>
-            <div class="panel-body">
-                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/BBBBBB/FFF" class="img-circle img-responsive"></div>
-                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EFEFEF/555" class="img-circle img-responsive"></div>
-                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EEEEEE/222" class="img-circle img-responsive"></div>
-            </div>
-        </div><!--/panel-->
     </div><!--/col-span-6-->
 @stop
 @section('info-panel2')

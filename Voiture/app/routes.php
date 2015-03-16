@@ -47,7 +47,9 @@ Route::group(['before' => 'isSuperAdmin'], function(){
 
     Route::get('home/s-admin' , [
         'as' => 'home-admin',
-        'uses' => 'SuperAdminController@loginSAdmin']);
+        'uses' => 'SuperAdminController@loginSAdmin'
+    ]);
+
 
 });
 
