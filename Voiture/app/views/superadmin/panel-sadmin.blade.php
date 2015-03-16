@@ -42,7 +42,7 @@
                 @foreach($joueursSemaine as $joueur)
                     <div class="col-xs-4 text-center">
                         <a href="{{ route ('user-detail')}}" class ='img-random' value="{{$joueur->id}}" data="search">
-                            <img src="{{asset("Photos/$joueur->avatar")}}" class="img-circle img-responsive img-random" >
+                            <img src="{{asset("photos/$joueur->avatar")}}" class="img-circle img-responsive img-random" >
                         </a>
                     </div>
                 @endforeach

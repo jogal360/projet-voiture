@@ -10,6 +10,7 @@ use Voiture\Entities\Utilisateur;
 use Voiture\Entities\User;
 use Voiture\Entities\BankAccount;
 use Voiture\Entities\Operation;
+use Voiture\Entities\Voiture;
 class UsersTableSeeder extends Seeder {
 
     public function run()
@@ -53,12 +54,13 @@ class UsersTableSeeder extends Seeder {
         }
         foreach(range(1, 500) as $index)
         {
-            BankAccount::create([
-                'user_id'        => $user->id,
+            Voiture::create([
+                nom_voiture', 'type', 'description', 'model', 'fabricant', 'resistance', 'rpm', 'vitesse', 'cylindres', 'cheval_vapeur', 'taille_recevoir', 'niveau', 'carrosserie', 'pneus', 'châssis', 'et_stabilite', 'et_esthetique', 'et_performance', 'et_equilibre', 'et_general'
                 'solde'         => $faker->randomNumber($nbDigits = NULL),
                 'created_at'    => $faker->dateTimeThisYear($max = 'now'),
                 'updated_at'    => $faker->dateTimeThisMonth($max = 'now')
             ]);
+
         }
 
     }
