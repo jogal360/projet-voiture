@@ -5,7 +5,6 @@
         <script src="{{ asset('Js/layout.js')}}"></script>
     @endif
     <script>
-        var pathImgWait = "{{  asset('Img/wait.gif') }}";
         var searchRoute = "{{ route('search-user') }}";
     </script>
 
@@ -121,7 +120,7 @@
                 </tbody>
             </table>
 
-            <br><p>Pagina:</p>
+            <br><p>Page:</p>
             {{ $dataUsers-> links() }}
             @if($entity == "mod")
                 <p><a class="btn btn-danger btn-sm" href="{{ route('mod-com') }}" role="button">Returner Moderateur Home</a></p>

@@ -49,6 +49,10 @@ Route::group(['before' => 'isSuperAdmin'], function(){
         'as' => 'home-admin',
         'uses' => 'SuperAdminController@loginSAdmin'
     ]);
+    Route::post('home/s-admin/{something?}' , [
+        'as' => 'home-admin-post',
+        'uses' => 'UsersController@search'
+    ]);
 
 
 });
@@ -68,6 +72,10 @@ Route::group(['before'=> 'auth'],function() {
         Route::post('list/search' , [
             'as' => 'search-user',
             'uses' => 'UsersController@search'
+        ]);
+        Route::post('home/s-admin' , [
+            'as' => 'home-admin-post',
+            'uses' => 'usersController@detailUser'
         ]);
         Route::post('users/detail',[
             'as' => 'user-detail',

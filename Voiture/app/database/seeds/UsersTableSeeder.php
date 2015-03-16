@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder {
                 'sexe'          => $faker->randomElement(['f','m']),
                 'phone'         => $faker->numberBetween($min = 10000000, $max = 1000000000),
                 'adr_postale'   => $faker->numberBetween($min = 10000, $max = 99999),
-                'avatar'        => '',
+                'avatar'        => $faker->randomElement(['p1.png','p2.png','p3.jpg','p4.jpg','p5.png','p6.png','p7.png','p8.jpg','p9.gif','p10.jpg']),
                 'description'   => $faker->text($maxNbChars = 240),
                 'website_url'   => $faker->url,
                 'adr_ip'        => $faker->ipv4,

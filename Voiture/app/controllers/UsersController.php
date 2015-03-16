@@ -180,7 +180,18 @@ class UsersController extends BaseController {
     {
         $id = Input::get('id');
         $user = $this->usersRepo->getAUser($id);
-        return View::make('users/detail-user',compact('user'));
+        $entity = '';
+        $search = Input::get('joueur');
+        if(Auth::user()->role_id == 7)
+        {
+            $entity = 'sadmin';
+        }
+        if(Auth::user()->role_id == 1)
+        {
+            $entity = 'mod';
+        }
+        $view = View::make('users/detail-user',compact('user','entity','search'))->render();
+        return $view;
     }
     public function editUser($id)
     {

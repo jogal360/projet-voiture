@@ -103,6 +103,9 @@
 <script src="{{ asset('Js/jquery.bpopup.min.js')}}"></script>
 <script src="{{ asset('Js/jquery.easing.1.3.js')}}"></script>
 <script src="{{ asset('Js/layout.js')}}"></script>
+<script>
+    var pathImgWait = "{{  asset('Img/wait.gif') }}";
+</script>
 {{ HTML::script('bootstrap-sweetalert/js/sweet-alert.js') }}
 {{ HTML::style('bootstrap-sweetalert/css/sweet-alert.css') }}
 <script>

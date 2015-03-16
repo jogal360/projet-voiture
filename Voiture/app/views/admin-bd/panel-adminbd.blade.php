@@ -1,4 +1,4 @@
-@extends('superadmin/home-admin')
+@extends('layout')
 @section('contentmod')
     <div class="col-md-6">
         <!-- div box total users -->
@@ -11,16 +11,14 @@
                     <div class="col-xs-9 text-right">
                         <div class="huge"><h2>{{ $numberUsers  }}</h2></div>
                         <div>
-                            <h4>
-                                @if( $numberUsers === 1)
-                                    Utilisateur
-                                @elseif( $numberUsers > 1)
-                                    Utilisateurs
-                                @else
-                                    Aucun utilisateur enregistré
-                                @endif
-                                dans la comunauté!
-                            </h4>
+                            @if( $numberUsers === 1)
+                                Utilisateur
+                            @elseif( $numberUsers > 1)
+                                Utilisateurs
+                            @else
+                                Aucun utilisateur enregistré
+                            @endif
+                            dans la comunauté!
                         </div>
                     </div>
                 </div>
@@ -36,19 +34,6 @@
         <!-- / div box total users -->
         <hr>
 
-        <div class="panel panel-warning">
-            <div class="panel-heading"><div class="panel-title"><h4>Joueurs de la semaine</h4></div></div>
-            <div class="panel-body">
-                @foreach($joueursSemaine as $joueur)
-                    <div class="col-xs-4 text-center">
-                        <a href="{{ route ('user-detail')}}" class ='img-random' value="{{$joueur->id}}" data="search">
-                            <img src="{{asset("Photos/$joueur->avatar")}}" class="img-circle img-responsive img-random" >
-                        </a>
-                    </div>
-                @endforeach
-
-            </div>
-        </div><!--/panel-->
         <div class="btn-group btn-group-justified">
             <a href="#" class="btn btn-primary col-sm-3">
                 <i class="glyphicon glyphicon-plus"></i><br>
@@ -72,6 +57,34 @@
 
         <div class="panel panel-default">
             <div class="panel-heading"><h4>Reports</h4></div>
+            <div class="panel-body">
+
+                <small>Success</small>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%">
+                        <span class="sr-only">72% Complete</span>
+                    </div>
+                </div>
+                <small>Info</small>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                        <span class="sr-only">20% Complete</span>
+                    </div>
+                </div>
+                <small>Warning</small>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                        <span class="sr-only">60% Complete (warning)</span>
+                    </div>
+                </div>
+                <small>Danger</small>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                        <span class="sr-only">80% Complete</span>
+                    </div>
+                </div>
+
+            </div><!--/panel-body-->
         </div><!--/panel-->
 
 
@@ -90,29 +103,19 @@
 
     </div><!--/col-->
     <div class="col-md-6">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-money fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge"><h2>{{ $numberAccounts  }}</h2></div>
-                        <div>
-                            <h4>
-                                @if( $numberAccounts === 1)
-                                    Bank Account enregistrés.
-                                @elseif( $numberAccounts > 1)
-                                    Bank Accounts enregistrés.
-                                @else
-                                    Aucun bank account enregistré
-                                @endif
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Notices</h4></div>
+            <div class="panel-body">
 
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    This is a dismissable alert.. just sayin'.
+                </div>
+
+                This is a dashboard-style layout that uses Bootstrap 3. You can use this template as a starting point to create something more unique.
+                <br><br>
+                Visit the Bootstrap Playground at <a href="http://bootply.com">Bootply</a> to tweak this layout or discover more useful code snippets.
+            </div>
         </div>
 
         <table class="table table-striped">
@@ -172,6 +175,14 @@
             </div><!--/panel content-->
         </div><!--/panel-->
 
+        <div class="panel panel-default">
+            <div class="panel-heading"><div class="panel-title"><h4>Engagement</h4></div></div>
+            <div class="panel-body">
+                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/BBBBBB/FFF" class="img-circle img-responsive"></div>
+                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EFEFEF/555" class="img-circle img-responsive"></div>
+                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EEEEEE/222" class="img-circle img-responsive"></div>
+            </div>
+        </div><!--/panel-->
     </div><!--/col-span-6-->
 @stop
 @section('info-panel2')

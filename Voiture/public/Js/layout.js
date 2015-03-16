@@ -24,22 +24,40 @@ $(document).ready(function() {
         var layout = $(this).attr('data');
         showProfilePopUp(id,layout,url);
     });
+    $('.img-random').click(function(e){
+        e.preventDefault();
+        $('#detailUser').html("");
+        var url = $(this).attr('href');
+        var id = $(this).attr('value');
+        var layout = 1;
+        var joueurjour = $(this).attr('data');
+        showProfilePopUp(id,layout,url,joueurjour);
+    });
     /**
      * To show the profile details in popup
      * @param id The id of user to search
      * @param id Layout origin
      * @return PopUp with the info profile
      */
-    function showProfilePopUp(id, layout,url)
+    function showProfilePopUp(id, layout,url,joueur)
     {
         var id      =   id;
         var layout  =   layout;
         var url     = url;
         var method  = '';
+       var joueur = joueur;
+        if(joueur != null)
+        {
+            joueur = "yes";
+        }
+        else
+        {
+            joueur = "no";
+        }
 
         if(layout == 1)
         {
-            method = "POST"
+            method = "POST";
         }
         else
         {
@@ -50,11 +68,11 @@ $(document).ready(function() {
             $.ajax({
                 type: method,
                 url: url,
-                data: {'id' : id},
+                data: {'id' : id, 'joueur': joueur},
                 beforeSend: function(){
                     $('#detailUser').append('<span class=\'button b-close\'><span>X</span></span>' +
                     '<div class="col-xs-12 cent"><div class="col-sm-12 col-xs-12"></div>' +
-                    '<img class="wait" src= "'+pathImgWait+'" /></div>');
+                    '<img class="wait" src= "'+ pathImgWait +'" /></div>');
                 },
                 success: function (data) {
                     $('#detailUser').html(" <span class='button b-close'><span>X</span></span>"+data);
