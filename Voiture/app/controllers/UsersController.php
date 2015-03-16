@@ -3,6 +3,7 @@ use Voiture\Managers\RegisterManager;
 use Voiture\Repositories\JoueurRepo;
 use Voiture\Repositories\RoleRepo;
 use Voiture\Repositories\UsersRepo;
+use Voiture\Managers\AccountManager;
 use Voiture\Entities\User;
 class UsersController extends BaseController {
 

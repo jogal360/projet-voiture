@@ -112,7 +112,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <table class="table table-striped">
@@ -128,13 +127,36 @@
             </tbody>
         </table>
 
-        <div class="panel panel-default">
+
+        <div class="panel panel-danger">
             <div class="panel-heading">
-                <div class="panel-title">
-                    <i class="glyphicon glyphicon-wrench pull-right"></i>
-                    <h4>Post Request</h4>
+                <div class="row">
+                    <div class="col-xs-9 text-left">
+                        <div class="huge"><h2>{{ $numberAccounts  }}</h2></div>
+                        <div>
+                            <h4>
+                                @if( $numberAccounts === 1)
+                                    Voiture enregistré.
+                                @elseif( $numberAccounts > 1)
+                                    Voitures enregistrés.
+                                @else
+                                    Aucun voiture enregistré
+                                @endif
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <i class="fa fa-car fa-5x"></i>
+                    </div>
                 </div>
             </div>
+            <div class="panel-footer">
+                <span class="pull-left"><b>View Details</b></span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
             <div class="panel-body">
 
                 <form class="form form-vertical">

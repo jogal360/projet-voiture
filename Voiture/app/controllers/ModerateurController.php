@@ -1,6 +1,5 @@
 <?php
 use Voiture\Repositories\UsersRepo;
-use Voiture\Managers\AccountManager;
 
 class ModerateurController extends BaseController {
 

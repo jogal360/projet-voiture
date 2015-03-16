@@ -51,6 +51,15 @@ class UsersTableSeeder extends Seeder {
                 'updated_at'    => $faker->dateTimeThisMonth($max = 'now')
             ]);
         }
+        foreach(range(1, 500) as $index)
+        {
+            BankAccount::create([
+                'user_id'        => $user->id,
+                'solde'         => $faker->randomNumber($nbDigits = NULL),
+                'created_at'    => $faker->dateTimeThisYear($max = 'now'),
+                'updated_at'    => $faker->dateTimeThisMonth($max = 'now')
+            ]);
+        }
 
     }
 }
