@@ -120,7 +120,7 @@ $(document).ready(function() {
         }
         if (jQuery.isEmptyObject(checked))
         {
-            swal("Pas d'utilisateurs sélectionnés");
+            swal("Pas d'elements sélectionnés");
             return;
         }
         else
@@ -253,7 +253,54 @@ $(document).ready(function() {
         }
 
     });
+    $('#ReloadServer').click(function(){
+        var value = $(this).attr('value');
+       alert(value);
+    });
 
+    $('#generer').click(function(e){
+        e.preventDefault();
+
+        var checked = [];
+        $('.sauv').each(function() { //loop through each checkbox
+            if(this.checked){
+                checked.push($(this).attr('href'));
+            }  //select all checkboxes with class "checkbox1"
+        });
+        if (jQuery.isEmptyObject(checked))
+        {
+            $('#generer').prop("readonly", true);
+            swal("Seleccione una busqueda");
+            return;
+        }
+        else
+        {
+            var searchRoute = $(this).attr('href');
+            var fieldSearch = $('input:radio[name=sauv]:checked').val();
+            alert(searchRoute);
+            var token = $(this).data('token');
+            $.ajax({
+                type: 'POST',
+                url: checked,
+                data: {'action' : fieldSearch, _token : token },
+                success : function(data){
+                    if(data.succ == false)
+                    {
+                        swal("Non autorisé", "administrateur", "error");
+                    }
+                    else
+                    {
+                        swal("resp", data.result, "error");
+                    }
+                }
+            });
+        }
+    });
+
+    $('#optimizeMyIsam').click(function(){
+        var value = $(this).attr('value');
+        alert(value);
+    });
 });
 
 

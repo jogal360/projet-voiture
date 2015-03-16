@@ -19,5 +19,13 @@ class SuperAdminController extends BaseController {
         $numberVoitures = $this->usersRepo->getNumberVoitures();
         return View::make('superadmin/panel-sadmin',compact('numberAccounts','joueursSemaine','numberVoitures'));
     }
+    public function panel()
+    {
+        return View::make('bdd/panel-bdd');
+    }
+    public function genererBd()
+    {
+        return Response::json(['succ'=> true, 'result' => Input::get('action')]);
+    }
 
 }

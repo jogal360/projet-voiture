@@ -51,21 +51,9 @@
             </div>
         </div><!--/panel-->
         <div class="btn-group btn-group-justified">
-            <a href="#" class="btn btn-primary col-sm-3">
-                <i class="glyphicon glyphicon-plus"></i><br>
-                Service
-            </a>
-            <a href="#" class="btn btn-primary col-sm-3">
-                <i class="glyphicon glyphicon-cloud"></i><br>
-                Cloud
-            </a>
-            <a href="#" class="btn btn-primary col-sm-3">
-                <i class="glyphicon glyphicon-cog"></i><br>
-                Tools
-            </a>
-            <a href="#" class="btn btn-primary col-sm-3">
-                <i class="glyphicon glyphicon-question-sign"></i><br>
-                Help
+            <a href="{{ route('taches-bdd') }}" class="btn btn-primary col-sm-3">
+                <i class="fa fa-database  fa-3x"></i><br>
+                <strong>Tâches sur la base de donées</strong>
             </a>
         </div>
 

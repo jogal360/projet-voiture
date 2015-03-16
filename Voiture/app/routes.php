@@ -106,10 +106,19 @@ Route::group(['before'=> 'auth'],function() {
             'as'    => 'voitures-list-post1',
             'uses'  => 'VoituresController@deleteVoiture'
         ]);
+        Route::post('bdd/commands', [
+            'as'    => 'generer-bd',
+            'uses'  => 'SuperAdminController@genererBd'
+        ]);
     });
     Route::get('voitures/list/{sortby?}/{order?}', [
         'as'    => 'voitures-list',
         'uses'  => 'VoituresController@listVoitures'
+    ]);
+
+    Route::get('bdd/panel', [
+        'as'    => 'taches-bdd',
+        'uses'  => 'SuperAdminController@panel'
     ]);
 
     //Para mostrar la lista de usuarios
