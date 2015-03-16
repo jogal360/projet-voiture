@@ -43,6 +43,12 @@ class UsersRepo extends BaseRepo{
 
         return $data ;
     }
+    public function getNumberAccounts($value, $data)
+    {
+        $data = User::where($value, 'LIKE', '%' . $data . '%')->take(3)->get();
+
+        return $data ;
+    }
     public function resultsSearchAll($value, $data)
     {
         $data = User::where($value, 'LIKE', '%' . $data . '%')->paginate(7);

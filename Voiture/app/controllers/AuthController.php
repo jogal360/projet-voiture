@@ -87,12 +87,15 @@ class AuthController extends BaseController {
 							$userBD = 'client';
 							$pwd = 'client';
 							break;
+                        case 7 :
+                            $userBD = 'admin';
+                            $pwd = 'adminpass';
+                            $route = 'home-admin';
+                            break;
 						default:
 							return Redirect::back()->with('login_error',1);
 					}
-					//dd($userBD, $pwd);
 					setUserPwd($userBD, $pwd);
-					//dd(Config::get('database.connections.mysql'));
                     return Redirect::route($route);
 				}
 				else
@@ -106,15 +109,6 @@ class AuthController extends BaseController {
 //		}
 	}
 
-    public function loginModCom()
-    {
-        //$numberUsers = $this->usersRepo->getNumberUsers();
-
-
-            return View::make('moderateur-com/panel-mod');
-
-
-    }
     public function listUsers()
     {
         $dataUsers   = $this->usersRepo->getAllUsers();

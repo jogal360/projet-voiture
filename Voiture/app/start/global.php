@@ -60,6 +60,11 @@ App::error(function(Symfony\Component\HttpKernel\Exception\HttpException $e)
     // Handle any HTTP exceptions thrown with App::abort() or from Laravel
     // for e.g. hitting a missing route
     $author = Auth::user()->role_id;
+    if(! $author)
+    {
+        Session::flush();
+        return Redirect::route('home');
+    }
     $page = '';
     switch ($author)
     {
@@ -177,6 +182,17 @@ function isModCom()
     if( Auth::check())
     {
         if(Auth::user()->role_id == 1)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+function isSAdmin()
+{
+    if( Auth::check())
+    {
+        if(Auth::user()->role_id == 7)
         {
             return true;
         }

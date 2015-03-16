@@ -2,7 +2,7 @@
 use Voiture\Repositories\UsersRepo;
 use Voiture\Managers\AccountManager;
 
-class ModerateurController extends BaseController {
+class SuperAdminController extends BaseController {
 
 
     protected $usersRepo;
@@ -12,9 +12,10 @@ class ModerateurController extends BaseController {
     {
         $this->usersRepo = $usersRepo;
     }
-    public function loginModerateur()
+    public function loginSAdmin()
     {
-        return View::make('moderateur-com/panel-mod');
+        $this->usersRepo->getNumberAccounts();
+        return View::make('superadmin/panel-sadmin');
     }
 
 }

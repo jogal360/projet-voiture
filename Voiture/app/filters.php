@@ -94,6 +94,13 @@ Route::filter('isModerateurCommunaute', function()
         return Redirect::route('logout');
     }
 });
+Route::filter('isSuperAdmin', function()
+{
+    if(! isSAdmin())
+    {
+        return Redirect::route('logout');
+    }
+});
 Route::filter('isSpecialist', function()
 {
     if(! isSpecialist())

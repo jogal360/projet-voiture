@@ -15,9 +15,9 @@
     array (
       'driver' => 'mysql',
       'host' => 'localhost',
-      'database' => 'PROJETVOITURE',
-      'username' => 'root',
-      'password' => '',
+      'database' => 'VOITURE',
+      'username' => 'admin',
+      'password' => 'adminpass',
       'charset' => 'utf8',
       'collation' => 'utf8_unicode_ci',
       'prefix' => '',

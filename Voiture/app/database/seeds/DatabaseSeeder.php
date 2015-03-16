@@ -24,25 +24,25 @@ class RolesTableSeeder extends Seeder {
 	{
 
 		DB::table('roles')->insert(array(
-			'name' => 'moderateur_com'
+			'name' => 'Modérateur de Communauté'
 		));
 		DB::table('roles')->insert(array(
-			'name' => 'specialiste'
+			'name' => 'Epecialiste'
 		));
 		DB::table('roles')->insert(array(
-			'name' => 'admin_concours'
+			'name' => 'Admin de concours'
 		));
 		DB::table('roles')->insert(array(
-			'name' => 'editorialiste'
+			'name' => 'Editorialiste'
 		));
 		DB::table('roles')->insert(array(
-			'name' => 'client'
+			'name' => 'Client'
 		));
 		DB::table('roles')->insert(array(
 			'name' => 'user'
 		));
         DB::table('roles')->insert(array(
-            'name' => 'superadmin'
+            'name' => 'Super admin'
         ));
 
 	}

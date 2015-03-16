@@ -32,6 +32,11 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->belongsTo('Voiture\Entities\Role');
 	}
+    public function bankAccount()
+    {
+        return $this->hasOne('Voiture\Entities\BankAccount');
+    }
+
 
 	public function setPasswordAttribute($value)
 	{

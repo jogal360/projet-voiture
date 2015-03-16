@@ -10,90 +10,112 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::pattern('id', '[0-9]+');
+Route::pattern('layout', '[0-9]+');
 
 //Ruta para mostrar el home
-Route::get('/', ['as'=> 'home','uses' => 'HomeController@showIndex']);
+Route::get('/', [
+    'as'=> 'home',
+    'uses' => 'HomeController@showIndex']);
 
 //Grupo para especificar las rutas disponibles cuando no esta logueado
 Route::group(['before'=>'guest'], function(){
     //Ruta para registrar un usuario
-    Route::get('sign-up', ['as' => 'sign_up', 'uses' => 'UsersController@signUp']);
+    Route::get('sign-up', [
+        'as' => 'sign_up',
+        'uses' => 'UsersController@signUp']);
 
     //Ruta para enviar los datos de registro
-    Route::post('sign-up', ['as' => 'register', 'uses' => 'UsersController@register']);
+    Route::post('sign-up', [
+        'as' => 'register',
+        'uses' => 'UsersController@register']);
 
     //Ruta para confirmar el registro por mail
-    Route::get('register/verify/{confirmationCode}', ['as' => 'confirmation_path', 'uses' => 'UsersController@confirm']);
+    Route::get('register/verify/{confirmationCode}', [
+        'as' => 'confirmation_path',
+        'uses' => 'UsersController@confirm']);
 
     //Ruta para iniciar sesión
-    Route::post('login', ['as' => 'login', 'uses' => 'AuthController@loginAdmin']);
+    Route::post('login', [
+        'as' => 'login',
+        'uses' => 'AuthController@loginAdmin']);
 });
 
-// Grupo para moderador de comunidad
-Route::group(['before' => 'isModerateurCommunaute'], function(){
-    //Para el inicio de sesion
-    Route::get('control/panel-admin/mod-communaute' , ['as' => 'mod-com', 'uses' => 'AuthController@loginModCom']);
 
-    Route::get('control/panel-admin/mod-communaute/users' , ['as' => 'list_users', 'uses' => 'ModerateurController@listUsers']);
+// Grupo para el superAdmin
+Route::group(['before' => 'isSuperAdmin'], function(){
 
-    Route::post('control/panel-admin/mod-communaute/users/detail',['as' => 'user-detail', 'uses' => 'ModerateurController@detailUser']);
+    Route::get('home/s-admin' , [
+        'as' => 'home-admin',
+        'uses' => 'SuperAdminController@loginSAdmin']);
 
-    Route::post('control/panel-admin/mod-communaute/users/edit',['as' => 'user-detail', 'uses' => 'ModerateurController@editUser']);
 });
+
 
 //Grupo para Specialist
 Route::group(['before' => 'isSpecialist'], function(){
     Route::get('control/panel-admin/specialist' , ['as' => 'specialist', 'uses' => 'AuthController@loginSpecialist']);
 });
+
 //Creamos un nuevo grupo y evaluamos que esten disponibles solo si se está conectado
 Route::group(['before'=> 'auth'],function() {
-    Route::pattern('id', '[0-9]+');
-    Route::pattern('layout', '[0-9]+');
-    //Ruta para cerrar sesión
-    Route::get('logout',['as' => 'logout', 'uses' => 'AuthController@logout']);
 
-    Route::post('control/panel-admin/mod-communaute/users/list/search' , [
-        'as' => 'search-user',
-        'uses' => 'ModerateurController@search'
-    ]);
+    Route::group(['before' => 'csrf'], function(){
 
-});
-Route::group(['before' => 'isModerateurCommunaute'], function(){
-    Route::get('control/panel-admin/mod-communaute' , [
-        'as' => 'mod-com',
-        'uses' => 'AuthController@loginModCom'
-    ]);
-    Route::get('control/panel-admin/mod-communaute/users/list/{sortby?}/{order?}' , [
-        'as'    => 'list_users',
-        'uses'  => 'ModerateurController@listUsers'
-    ]);
-    Route::get('control/panel-admin/mod-communaute/users/edit/{id}', [
-        'as'    => 'user-edit',
-        'uses'  => 'ModerateurController@editUser']);
-}); //End groupMod
-Route::group(['before' => 'csrf'], function(){
-// Grupo para moderador de comunidad
-    Route::group(['before' => 'isModerateurCommunaute'], function()
-    {
-        Route::post('control/panel-admin/mod-communaute/users/detail',[
-            'as'    => 'user-detail',
-            'uses'  => 'ModerateurController@detailUser'
+        //Post para la busqueda
+        Route::post('list/search' , [
+            'as' => 'search-user',
+            'uses' => 'UsersController@search'
         ]);
+        Route::post('users/detail',[
+            'as' => 'user-detail',
+            'uses' => 'UsersController@detailUser']);
 
-        Route::put('control/panel-admin/mod-communaute/users/detail',[
-            'as'    => 'update_user',
-            'uses'  => 'ModerateurController@updateProfil'
-        ]);
-
-        Route::post('control/panel-admin/mod-communaute/users/list/delete', [
+        Route::post('users/edit',[
+            'as' => 'user-edit-post',
+            'uses' => 'UsersController@editUser']);
+        Route::post('users/list/delete', [
             'as'    => 'delete-user',
-            'uses'  => 'ModerateurController@deleteUser'
+            'uses'  => 'UsersController@deleteUser'
         ]);
-        Route::post('control/panel-admin/mod-communaute/users/list/{sortby?}/{order?}' , [
+        Route::post('users/list/{sortby?}/{order?}' , [
             'as'    => 'list_users-post',
-            'uses'  => 'ModerateurController@deleteUser'
+            'uses'  => 'UsersController@deleteUser'
         ]);
 
     });
+    //Para mostrar la lista de usuarios
+    Route::get('users/list/{sortby?}/{order?}' , [
+        'as'    => 'list_users',
+        'uses'  => 'UsersController@listUsers'
+    ]);
+
+    //Ruta para cerrar sesión
+    Route::get('logout',[
+        'as' => 'logout',
+        'uses' => 'AuthController@logout']);
+
+
+    Route::get('users/edit/{id}', [
+        'as'    => 'user-edit',
+        'uses'  => 'UsersController@editUser'
+    ]);
+
+
+    Route::put('users/detail',[
+        'as'    => 'update_user',
+        'uses'  => 'UsersController@updateProfil'
+    ]);
+
+
 
 });
+Route::group(['before' => 'isModerateurCommunaute'], function(){
+    //Para el inicio de sesion
+    Route::get('mod-communaute' , [
+        'as' => 'mod-com',
+        'uses' => 'ModerateurController@loginModerateur'
+    ]);
+
+
+}); //End groupMod

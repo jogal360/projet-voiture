@@ -1,14 +1,12 @@
-@if($entity == "mod")
-    @extends('moderateur-com/home-mod')
-@endif
+@extends($extends)
 
 @section('contentmod')
     @if($search==true)
-    <script src="{{ asset('Js/layout.js')}}"></script>
+        <script src="{{ asset('Js/layout.js')}}"></script>
     @endif
     <script>
         var pathImgWait = "{{  asset('Img/wait.gif') }}";
-        var searchRoute = "{{ route('search-user') }}"
+        var searchRoute = "{{ route('search-user') }}";
     </script>
 
     {{ Notification::getAliased('okUpdate'); }}
@@ -126,7 +124,9 @@
             <br><p>Pagina:</p>
             {{ $dataUsers-> links() }}
             @if($entity == "mod")
-                <p><a class="btn btn-danger btn-sm" href="{{ route('mod-com') }}" role="button">Returner</a></p>
+                <p><a class="btn btn-danger btn-sm" href="{{ route('mod-com') }}" role="button">Returner Moderateur Home</a></p>
+            @elseif($entity == "sadmin")
+                <p><a class="btn btn-danger btn-sm" href="{{ route('home-admin') }}" role="button">Returner Admin Home</a></p>
             @endif
         </div>
     </div>

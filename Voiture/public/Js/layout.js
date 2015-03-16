@@ -187,7 +187,7 @@ $(document).ready(function() {
             data: {'method': fieldSearch, 'data' : name },
             success: function (data) {
                 //Escribimos las sugerencias que nos manda la consulta
-                $(divName).fadeIn(800).html(data);
+                $(divName).fadeIn(800).html(data.result);
 
                 //Al hacer click en algua de las sugerencias
                 $('.list-group-item').on('click', function () {
@@ -222,7 +222,7 @@ $(document).ready(function() {
                 url: searchRoute,
                 data: {'method' : fieldSearch, _token : token, 'data':dataInput, 'all':'all' },
                 success : function(data){
-                    if(data.success == false)
+                    if(data.succ == false)
                     {
                         swal("Non autorisé", "administrateur", "error");
                     }
