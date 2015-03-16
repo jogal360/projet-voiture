@@ -35,8 +35,20 @@
 @endif
 <div class="col-xs-12 text-center">
 
-    <img src="{{asset("Photos/$user->avatar")}}" class="img-circle img-responsive img-random" >
+    <img src="{{asset("photos/$user->avatar")}}" class="img-circle img-responsive img-random" >
 
+</div>
+<div class="col-xs-12">
+    <div class="col-sm-4 col-xs-12">
+        <p>
+            Pseudo:
+        </p>
+    </div>
+    <div class="col-sm-8 col-xs-12">
+       <p>
+           {{$user->pseudo}}
+       </p>
+    </div>
 </div>
 <div class="col-xs-12">
     <div class="col-sm-4 col-xs-12">

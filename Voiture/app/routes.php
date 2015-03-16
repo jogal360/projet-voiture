@@ -77,10 +77,11 @@ Route::group(['before'=> 'auth'],function() {
             'as' => 'home-admin-post',
             'uses' => 'usersController@detailUser'
         ]);
+
         Route::post('users/detail',[
             'as' => 'user-detail',
-            'uses' => 'UsersController@detailUser']);
-
+            'uses' => 'UsersController@detailUser'
+        ]);
         Route::post('users/edit',[
             'as' => 'user-edit-post',
             'uses' => 'UsersController@editUser']);
@@ -92,8 +93,25 @@ Route::group(['before'=> 'auth'],function() {
             'as'    => 'list_users-post',
             'uses'  => 'UsersController@deleteUser'
         ]);
+        Route::post('voitures/list}', [
+            'as'    => 'voitures-list-post',
+            'uses'  => 'VoituresController@detailVoiture'
+        ]);
+        Route::post('voitures/lists/delete', [
+            'as'    => 'delete-voiture',
+            'uses'  => 'VoituresController@deleteVoiture'
+        ]);
 
+        Route::post('voitures/list/{sortby?}/{order?}', [
+            'as'    => 'voitures-list-post1',
+            'uses'  => 'VoituresController@deleteVoiture'
+        ]);
     });
+    Route::get('voitures/list/{sortby?}/{order?}', [
+        'as'    => 'voitures-list',
+        'uses'  => 'VoituresController@listVoitures'
+    ]);
+
     //Para mostrar la lista de usuarios
     Route::get('users/list/{sortby?}/{order?}' , [
         'as'    => 'list_users',
@@ -116,9 +134,6 @@ Route::group(['before'=> 'auth'],function() {
         'as'    => 'update_user',
         'uses'  => 'UsersController@updateProfil'
     ]);
-
-
-
 });
 Route::group(['before' => 'isModerateurCommunaute'], function(){
     //Para el inicio de sesion

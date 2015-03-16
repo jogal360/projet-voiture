@@ -92,6 +92,11 @@ class AuthController extends BaseController {
                             $pwd = 'adminpass';
                             $route = 'home-admin';
                             break;
+                        case 8 :
+                            $userBD = '';
+                            $pwd = 'adminpass';
+                            $route = 'home-admin';
+                            break;
 						default:
 							return Redirect::back()->with('login_error',1);
 					}

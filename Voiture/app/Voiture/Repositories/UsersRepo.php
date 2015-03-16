@@ -3,7 +3,7 @@
 
 namespace Voiture\Repositories;
 use Voiture\Entities\BankAccount;
-use Voiture\Entities\Role;
+use Voiture\Entities\Voiture;
 use Voiture\Entities\User;
 use Illuminate\Support\Facades\Redirect;
 
@@ -47,6 +47,11 @@ class UsersRepo extends BaseRepo{
     public function getNumberAccounts()
     {
         $data = BankAccount::all()->count();
+        return $data ;
+    }
+    public function getNumberVoitures()
+    {
+        $data = Voiture::all()->count();
         return $data ;
     }
     public function getUsersRandom()

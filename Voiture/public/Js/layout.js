@@ -127,7 +127,7 @@ $(document).ready(function() {
         {
             swal({
                     title: "Êtes-vous sûr?",
-                    text: "Vous ne serez pas en mesure de récupérer cet utilisateur!",
+                    text: "Vous ne serez pas en mesure de récupérer cet registry!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: 'btn-danger',

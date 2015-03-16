@@ -22,10 +22,10 @@ class CreateVoitureTable extends Migration {
 			$table->string('fabricant');
 			$table->smallInteger('resistance');
 			$table->smallInteger('rpm');
-			$table->decimal('vitesse', 3, 2);
+			$table->decimal('vitesse');
 			$table->tinyInteger('cylindres');
 			$table->smallInteger('cheval_vapeur');
-			$table->decimal('taille_recevoir', 3, 2);
+			$table->decimal('taille_recevoir');
 			$table->tinyInteger('niveau');
 			$table->string('carrosserie');
 			$table->string('pneus');

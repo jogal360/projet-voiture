@@ -9,7 +9,7 @@ class Voiture extends \Eloquent {
 
 
     protected $fillable = array('nom_voiture', 'type', 'description', 'model', 'fabricant', 'resistance', 'rpm', 'vitesse', 'cylindres', 'cheval_vapeur', 'taille_recevoir', 'niveau', 'carrosserie', 'pneus', 'châssis', 'et_stabilite', 'et_esthetique', 'et_performance', 'et_equilibre', 'et_general');
-    protected $table = 'bank_account';
+    protected $table = 'voiture';
 
     //funcion qcon el nombre que se le da en archivo de view
     public function user()
